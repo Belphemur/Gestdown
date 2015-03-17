@@ -14,7 +14,7 @@ class View extends Result
     /**
      * Constructeur de la classe
      *
-     * @param unknown_type $path
+     * @param String $path
      */
     public function __construct ($path)
     {
@@ -63,7 +63,7 @@ class View extends Result
     /**
      * Rendu d'un fichier
      *
-     * @param mix $file
+     * @param mixed $file
      * @return string
      */
     public function render ($file)
@@ -79,11 +79,22 @@ class View extends Result
      * Convertit un Result en View
      *
      * @param Result $res
-     * @return none
      */
 	public function convert(Result $res)
 	{
 		$this->set_vars($res->get_vars());
 	}
+
+    /**
+     * Remove all special characted
+     * @param $string
+     * @return String
+     */
+    public function clean ($string) {
+        $string = str_replace(' ', '-', $string); // Replaces all spaces with hyphens.
+        $string = preg_replace('/[^A-Za-z0-9\-]/', '', $string); // Removes special chars.
+
+        return preg_replace('/-+/', '-', $string); // Replaces multiple hyphens with single one.
+    }
 }        
 ?>
