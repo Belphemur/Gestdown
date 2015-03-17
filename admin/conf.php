@@ -9,7 +9,7 @@ $nom_site = 'Ame no Tsuki'; //Nom de votre site
 $email_admin = 'balor@gestdown.info'; //Votre email
 $url_site = 'http://www.gestdown.info/'; //Adresse de votre site
 $page_dl ='index'; //nom de la premi�re page
-$urlPattern='.gestdown.info/';
+$urlPattern='';
 $joomla=false;
 
 //Conf pour le FTP\\
@@ -38,7 +38,7 @@ $sql_pass = 'b3myhtx9'; //Le passe d'acc�s � votre base de donn�es
 $sql_bdd = 'c1mysql'; //Le nom de votre base de donn�e
 $timeout=60;
 //$diskCache='C:/EasyPHP-5.3.3.1/www/gestdown/queries_cache';
-$diskCache='/var/www/gestdown.info/tmp/';
+$diskCache='D:/Temp/cache';
 $tmpDir = $diskCache;
 
 //Episodes Config
@@ -113,7 +113,7 @@ DEFINE('TEMPLATE', './includes/template.php');
 //$db= new ezDB();
 $db= ezDB::getInstance();
 // Specify a cache dir. Path is taken from calling script
-$db->enableDiskCache($diskCache,$timeout);
+//$db->enableDiskCache($diskCache,$timeout);
 
 // (1. You must create this dir. first!)
 // (2. Might need to do chmod 775)
