@@ -55,7 +55,7 @@ class ezDB {
      * Password = "toor"
      * Database = "test"
      * </code>
-     * @param string $path path to the ini file 
+     * @param string $path path to the ini file
      */
     public function iniFileConnect($path) {
         if (!file_exists($path))
@@ -71,7 +71,7 @@ class ezDB {
      * @param string $host
      * @param string $user
      * @param string $pass
-     * @param string $db 
+     * @param string $db
      */
     public function connect($host, $user, $pass, $db) {
         if ($this->isConnected())
@@ -286,7 +286,7 @@ class ezDB {
 
     /**
      * Trace all the query by lauching debug() after each call
-     * @param bool $flag 
+     * @param bool $flag
      */
     public function setTrace($flag=true) {
         if ($flag === true || $flag === false)
@@ -303,7 +303,7 @@ class ezDB {
 
     /**
      * Test if there is a connection.
-     * @return bool 
+     * @return bool
      */
     public function isConnected() {
         return!is_null($this->dbWrap);
@@ -336,7 +336,7 @@ class ezDB {
     /**
      * Function used in pQuery to bind the results
      * @param mysqli_stmt $obj
-     * @param array $bindResults 
+     * @param array $bindResults
      */
     protected function bindResults(&$obj, &$bindResults) {
         return call_user_func_array(array($obj, "bind_result"), $bindResults);
@@ -345,7 +345,7 @@ class ezDB {
     /**
      * Trasform an array with objects to an associative array
      * @param array $arrayObjs
-     * @return array 
+     * @return array
      */
     protected function objsToAssocArray($arrayObjs) {
         $array = array();
@@ -397,9 +397,9 @@ class ezDB {
             else if (preg_match("/^select\s+/i", $this->lastQuery))
             {
                 $stmt->store_result();
-                
+
                 $this->affectedRows = $stmt->num_rows;
-                
+
                 $result = $stmt->result_metadata();
 //Used for the debug
                 $this->colInfos[] = $result->fetch_fields();
@@ -427,7 +427,7 @@ class ezDB {
                 }
             }
 
-            
+
             $this->lastQueryInfos = $this->dbWrap->info;
             $stmt->close();
 
@@ -449,7 +449,7 @@ class ezDB {
      * Alias to preparedQuery
      * @param string $query
      * @param asscociative array $bindParams
-     * @return int 
+     * @return int
      */
     public function pQuery($query, $bindParams) {
         return $this->preparedQuery($query, $bindParams);
@@ -458,7 +458,7 @@ class ezDB {
     /**
      * Used to do multiple queries
      * @param string $sql
-     * @return int 
+     * @return int
      */
     public function mQuery($sql) {
         if (!$this->isConnected())
@@ -477,7 +477,7 @@ class ezDB {
         if ($this->dbWrap->error)
             throw new Exception('ezDB ERROR: mQuery() -> multi_query ERROR :' . $this->dbWrap->error, $this->dbWrap->errno);
 
-        while ($this->dbWrap->more_results())
+        while(true)
         {
             $result = $this->dbWrap->store_result();
             if ($result !== false)
@@ -493,7 +493,10 @@ class ezDB {
                 }
             }
             $this->numQuerries++;
-            $this->dbWrap->next_result();
+            if ($this->dbWrap->more_results())
+                $this->dbWrap->next_result();
+            else
+                break;
         }
         $this->lastQueryInfos = $this->dbWrap->info;
 
@@ -578,7 +581,7 @@ class ezDB {
      * @param string $query
      * @param bool $object
      * @param int $offset
-     * @return mixed 
+     * @return mixed
      */
     public function getRow($query=false, $object=true, $offset=0) {
         if ($query !== false)
@@ -594,7 +597,7 @@ class ezDB {
     /**
      * Get the value of the SQL request
      * @param string $query
-     * @return mixed 
+     * @return mixed
      */
     public function getVar($query=false) {
         if ($query !== false)
