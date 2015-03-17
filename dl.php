@@ -82,7 +82,7 @@ if ($result)
 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>Télécharger <?php echo empty($error) ? $nom : ''; ?> sur Gestdown</title>
-        <link rel="stylesheet" href="http://css.gestdown.info/miroriii.css,bubbles.css,hoster.css" type="text/css" />
+        <link rel="stylesheet" href="http://gestdown.info/css/miroriii.css,bubbles.css,hoster.css" type="text/css" />
         <script type="text/JavaScript" src="http://js.gestdown.info/rounded_corners.js"></script>
     </head><body>
         <div class="menu">
