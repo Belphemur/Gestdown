@@ -1,0 +1,16 @@
+a{outline:none;}
+.unit-rating{list-style:none;margin:0;padding:0;width:100px;height:20px;position:relative;background:url('http://style.gestdown.info/star.gif') top left repeat-x;}
+.unit-rating li{text-indent:-90000px;padding:0;margin:0;/*\*/ float:left;/* */;}
+.unit-rating li a{display:block;width:20px;height:20px;text-decoration:none;text-indent:-9000px;z-index:20;position:absolute;padding:0;}
+.unit-rating li a:hover{background:url('http://style.gestdown.info/star.gif') left center;z-index:2;left:0;}
+.unit-rating a.r1-unit{left:0;}
+.unit-rating a.r1-unit:hover{width:20px;}
+.unit-rating a.r2-unit{left:20px;}
+.unit-rating a.r2-unit:hover{width:40px;}
+.unit-rating a.r3-unit{left:40px;}
+.unit-rating a.r3-unit:hover{width:60px;}
+.unit-rating a.r4-unit{left:60px;}
+.unit-rating a.r4-unit:hover{width:80px;}
+.unit-rating a.r5-unit{left:80px;}
+.unit-rating a.r5-unit:hover{width:100px;}
+.unit-rating li.current-rating{background:url('http://style.gestdown.info/star.gif') left bottom;position:absolute;height:20px;display:block;text-indent:-9000px;z-index:1;}

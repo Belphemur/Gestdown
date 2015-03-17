@@ -1,0 +1,81 @@
+#php_value output_handler ob_gzhandler 
+RewriteEngine on
+RewriteCond %{HTTP_HOST} !^127.0.0.1$ [NC]
+RewriteCond %{HTTP_HOST} !^localhost$ [NC]
+RewriteCond %{HTTP_HOST} !www\.gestdown\.info$
+RewriteRule ^(.*)   http://www.gestdown.info/$1  [QSA,L,R=301] 
+
+RewriteCond %{HTTP_USER_AGENT} !FeedBurner
+RewriteRule ^rss\.php$ http://feeds.feedburner.com/GestdownSortiesDeLaAmeNoTsuki?format=xml [R,L]
+
+RewriteRule  ^(.+)dl-(.+)-(.+)\.html$ ./hitcounter.php?id=$2&q=$3 [PT]
+RewriteRule  ^dl-(.+)-(.+)\.html$ ./hitcounter.php?id=$1&q=$2 [PT]
+
+RewriteRule  ^mirror/(.+)/(.+)/(.+)/redirect/(.+)/(.+)$ ./dl.php?s=$1&i=$2&q=$3&h=$4&type=mirror [PT,L]
+RewriteRule  ^mirror/(.+)/(.+)/(.+)/(.+)\.(.+)$ ./dl.php?s=$1&i=$2&q=$3&type=mirror [PT]
+RewriteRule  ^mirror-(.+)-(.+)-(.+)\.html$ ./dl.php?s=$1&i=$2&q=$3&type=mirror [PT]
+
+RewriteRule  ^file/(.+)/redirect/(.+)/(.+)$ ./dl.php?fid=$1&h=$2&type=file [PT,L]
+RewriteRule  ^file/(.+)/(.+)\.(.+)$ ./dl.php?fid=$1&type=file [PT]
+
+RewriteRule  ^tor-(.+)-(.+)\.html$ ./hitcounter.php?id=$1&q=$2&t [PT]
+RewriteRule  ^ep-(.+)\.html$ ./index.php?ext=0&id=$1&ep [PT]
+RewriteRule  ^serie-([0-9]+)-(.+)\.html$ ./index.php?ext=0&id=$1&serie [PT]
+RewriteRule  ^serie-([0-9]+)\.html$ ./index.php?ext=0&id=$1&serie [PT]
+RewriteRule  ^avancement\.html$ ./index.php?ext=0&avancement [PT]
+
+RewriteRule  ^(.+)ajax_index\.php$  ajax_index.php [PT]
+RewriteRule ^(js|templates)/(.+)-([0-9]+)\.(js|css)$ $1/$2.$4 
+
+RewriteRule ^catdownload\.php?categorie=(.+)$ ./serie-$1.html [R=301]
+
+<IfModule mod_headers.c>
+Header set Access-Control-Allow-Origin "*"
+</IfModule>
+
+#<IfModule mod_expires.c>
+#	<FilesMatch "\.(gif|jpg|jpeg|png|swf|css|js|html?|xml|txt|ico)$">
+#		ExpiresActive On
+#		ExpiresDefault "access plus 10 years"
+#	</FilesMatch>
+#</IfModule>
+#<IfModule mod_rewrite.c>
+#	RewriteEngine On
+	
+#	RewriteCond %{REQUEST_FILENAME} !-f
+#	RewriteCond %{REQUEST_FILENAME} !-d
+#	RewriteRule ^(.*\.(js|css))$ smartoptimizer/?$1
+	
+#	<IfModule mod_expires.c>
+#		RewriteCond %{REQUEST_FILENAME} -f
+#		RewriteRule ^(.*\.(js|css|html?|xml|txt))$ smartoptimizer/?$1
+#	</IfModule>
+
+#	<IfModule !mod_expires.c>
+#		RewriteCond %{REQUEST_FILENAME} -f
+#		RewriteRule ^(.*\.(gif|jpg|jpeg|png|swf|css|js|html?|xml|txt))$ smartoptimizer/?$1
+#	</IfModule>
+#</IfModule>
+#<FilesMatch "\.(gif|jpg|jpeg|png|swf|css|js|html?|xml|txt)$">
+#	FileETag none
+#</FilesMatch>
+# 1 YEAR
+<FilesMatch "\.(ico|pdf|flv)$">
+Header set Cache-Control "max-age=29030400, public"
+Header unset Expires
+</FilesMatch>
+# 1 MONTH
+#<FilesMatch "\.(txt|css|js)$">
+#Header set Cache-Control "max-age=2592000, proxy-revalidate, must-revalidate"
+#Header unset Expires
+#</FilesMatch>
+# 2 WEEK
+<FilesMatch "\.(jpg|jpeg|png|gif|swf|mp3)$">
+Header set Cache-Control "max-age=1209600, public"
+Header unset Expires
+</FilesMatch>
+# 10 MIN
+#<FilesMatch "\.(xml|html|htm|php)$">
+#Header set Cache-Control "max-age=600, private, proxy-revalidate, must-revalidate"
+#</FilesMatch>
+

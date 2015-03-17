@@ -1,0 +1,255 @@
+@charset "utf-8";
+body  {
+	font: 14px Verdana, Arial, Helvetica, sans-serif;
+	background: #666666;
+	margin: 0; /* il est conseillé de mettre à zéro la marge et le remplissage de l'élément body, pour tenir compte des différentes valeurs par défaut des navigateurs */
+	padding: 0;
+	text-align: center; /* ce paramétrage centre le conteneur dans les navigateurs IE 5.x. Le texte est ensuite aligné à gauche (valeur par défaut) dans le sélecteur #container */
+	background-image:url('./img/wallpaper.jpg');
+	background-position: inherit;
+	background-repeat: repeat;
+	background-color: #4e556c;
+}
+
+/* Conseils pour cette mise en page hybride 
+1. La dimension de base (indiquée en ems) des colonnes latérales est basée sur la taille de police par défaut de l'utilisateur. Il est donc important de veiller à ce que les graphismes d'arrière-plan des colonnes en tiennent compte. Avec un codage correct, l'accessibilité est meilleure pour les utilisateurs ayant besoin de polices de grande taille, puisque la largeur des colonnes reste proportionnelle. Si ce choix est incompatible avec la mise en page voulue, il suffit d'indiquer la largeur en pixels et de modifier en conséquence la taille des marges du div #mainContent.
+2. La taille des colonnes latérales de cette disposition étant basée sur la taille à 100 % du texte dans l'élément body, si vous diminuez globalement la taille du texte en utilisant la propriété font-size: 80% pour l'élément body ou l'élément #container, n'oubliez pas que la largeur des colonnes sera proportionnellement réduite. Pour compenser cette réduction, il est conseillé d'augmenter leur largeur, ainsi que la taille des marges latérales de l'élément div #mainContent.
+3. Si la taille de police est modifiée individuellement dans chaque élément div au lieu d'une modification globale (par ex. : la taille de police de #sidebar1 est réduite à 70 % et celle de #mainContent à 85 %), ce choix modifiera proportionnellement la taille globale de chaque élément div. Il est conseillé de modifier la taille de police en fonction de la taille de police finale.
+4. L'élément div #container n'est pas nécessaire pour cette disposition avec la largeur 100&nbsp;%. Toutefois, vous pouvez l'utiliser pour créer de fausses colonnes ou limiter la largeur de la mise en page.
+5. Il n'est pas nécessaire de définir une largeur de 100&nbsp;% pour l'élément div #container puisque, par définition, un élément div utilise 100&nbsp;% de l'espace disponible. Toutefois, sa présence ici permet si nécessaire de réduire plus aisément la taille du conteneur global (en laissant un peu de marge de part et d'autre).
+*/
+
+.thrColHybHdr #container { 
+	width: 85%;
+	padding-top:240px;
+/*	background: #FFFFFF;*/
+	margin: 0 auto;  /*les marges automatiques (et dotées d'une largeur positive) centrent la page si nécessaire */
+	text-align: left; /* ce paramétrage annule le paramètre text-align: center de l'élément body. */
+
+
+}  
+.thrColHybHdr #header { 
+	background:url('./img/header.png');
+	padding-bottom:232px;
+	background-position:center top;
+	background-repeat:no-repeat;
+} 
+#toaru
+{
+	background:url(img/toaru.png) no-repeat top right;
+}
+#eleven
+{
+	background:url(img/eleven.png) no-repeat top left;
+}
+
+.thrColHybHdr #header h1 {
+	margin: 0; /* la mise à zéro de la marge du dernier élément du div #header permet d'éviter une disparition de la marge (espace inexplicable entre les éléments div). Si l'élément div est entouré d'une bordure, cette précaution n'est pas nécessaire, car la bordure évite également la disparition de la marge */
+	padding: 10px 0; /* l'utilisation de remplissage, au lieu d'une marge, permet d'éloigner l'élément des bords de l'élément div */
+}
+
+/* Conseils pour sidebar1 :
+1. si vous définissez une valeur de taille de police pour cet élément div, la largeur totale de ce dernier sera ajustée en conséquence.
+2. Comme nous travaillons en ems, il est préférable de ne pas utiliser de remplissage pour l'encadré même. Pour les navigateurs conformes aux standards, il sera ajouté à la largeur, créant ainsi une largeur réelle inconnue. 
+3. Pour créer un espace entre le côté de l'élément div et les éléments qu'il contient, attribuez une marge gauche et une marge droite à ces éléments, comme dans la règle ".thrColHybHdr #sidebar1 p".
+*/
+.thrColHybHdr #sidebar1 {
+	float: left; 
+	width: 230px; /* cet élément est flottant, il faut donc lui attribuer une largeur */
+	/*background: #EBEBEB; /* la couleur de l'arrière-plan est affichée sur la largeur du contenu de la colonne, mais pas au-delà */
+	background: url('./img/menu_fond.png') no-repeat top;  
+}
+.thrColHybHdr #menu {
+	/*background: #EBEBEB; /* la couleur de l'arrière-plan est affichée sur la largeur du contenu de la colonne, mais pas au-delà */
+	padding: 0 0; /* le remplissage en haut et en bas crée un espace visuel à l'intérieur de cet élément div */
+	background: repeat url('./img/menu_repeat.png') top;
+}
+.thrColHybHdr #menu_fin {
+	/*background: #EBEBEB; /* la couleur de l'arrière-plan est affichée sur la largeur du contenu de la colonne, mais pas au-delà */
+	padding: 0 0; /* le remplissage en haut et en bas crée un espace visuel à l'intérieur de cet élément div */
+	background:url('./img/menu_fin.png') no-repeat top;
+	height:20px;
+	width:230px;
+}
+.thrColHybHdr #sidebar2 {
+	float: right; 
+	width: 220px; /* cet élément est flottant, il faut donc lui attribuer une largeur */
+	background: #EBEBEB; /* la couleur de l'arrière-plan est affichée sur la largeur du contenu de la colonne, mais pas au-delà */
+	padding: 0 0; /* le remplissage en haut et en bas crée un espace visuel à l'intérieur de cet élément div */
+	background:url('./img/colonnes.png') center repeat-y;
+	border:solid 1px #000;
+}
+.thrColHybHdr #sidebar1 h3, .thrColHybHdr #sidebar1 p, .thrColHybHdr #sidebar2 p, .thrColHybHdr #sidebar2 h3 {
+	margin-left: 10px; /* il est conseillé d'attribuer des valeurs pour les marges gauche et droite de chaque élément qui sera placé dans les colonnes latérales */
+	margin-right: 10px;
+}
+
+/* Conseils pour mainContent :
+1. Si vous attribuez à cet élément div #mainContent une valeur de police différente de celle utilisée pour l'élément div #sidebar1, les marges de l'élément div #mainContent seront basées sur la taille de sa police, et la largeur de l'élément div #sidebar1 sera basée sur la taille de sa police. Il peut être utile de modifier les valeurs de ces éléments div.
+2. L'espace compris entre les éléments mainContent et sidebar1 est créé avec la marge gauche de l'élément div mainContent.  Quelle que soit la taille du contenu dans l'élément div sidebar1, l'espace des colonnes reste préservé. Vous pouvez supprimer cette marge gauche si vous souhaitez que le texte de l'élément div #mainContent remplisse l'espace de l'élément #sidebar1 lorsque le contenu de ce dernier se termine.
+3. Pour éviter une perte de l'élément flottant, il peut être nécessaire de faire des tests pour déterminer la taille maximale approximative de l'image ou de l'élément, car cette disposition est basée sur une combinaison de la taille de police par défaut de l'utilisateur et des valeurs que vous définissez. Toutefois, si la taille de police d'un utilisateur est inférieure à la taille normale, l'espace disponible dans le div #mainContent sera moins important que celui que vous verrez lors de vos tests.
+4. Dans le commentaire conditionnel pour Internet Explorer ci-dessous, la propriété zoom permet de donner à l'élément mainContent l'attribut "hasLayout." Cela évite l'apparition de plusieurs bogues spécifiques d'Internet Explorer.
+*/
+.thrColHybHdr #mainContent {
+ 	margin: 0 2em 0 16em; /* la marge droite peut être indiquée en ems ou en pixels. Elle crée l'espace dans la partie inférieure du côté droit de la page. */ 
+	padding: 0 1em 0 1em; /* ce remplissage permet de créer un espace vide à l'intérieur du cadre. */
+	background:url('img/central.png') repeat;
+	border-left: #000 solid 2px;
+	border-right:#000 solid 2px;
+	min-width:480px;
+} 
+.thrColHybHdr #footer { 
+	padding: 0 0; /* ce remplissage correspond à l'alignement à gauche des éléments des div qui apparaissent au-dessus. */
+	background:#DDDDDD;
+	background:url('img/footer.png') center;
+	height:98px;
+} 
+.thrColHybHdr #footer p {
+	margin: 0; /* la mise à zéro de la marge du premier élément du pied de page permet d'éviter une possible disparition de la marge (espace entre les éléments div) */
+	padding: 0 0; /* l'utilisation d'un remplissage pour cet élément crée un espace, tout comme une marge l'aurait fait, mais en évitant le risque de disparition de la marge */
+}
+
+/* Diverses classes à réutiliser */
+.fltrt { /* cette classe permet de rendre flottant le côté droit d'un élément dans la page. L'élément flottant doit précéder l'élément à côté duquel il doit se trouver dans la page. */
+	float: right;
+	margin-left: 8px;
+}
+.fltlft { /* cette classe permet de rendre flottant le côté gauche d'un élément dans la page */
+	float: left;
+	margin-right: 8px;
+}
+.clearfloat { /* cette classe doit être placée pour un élément div ou break et doit être l'élément final avant la balise de fin d'un conteneur qui doit contenir entièrement un élément flottant */
+	clear:both;
+    height:0;
+    font-size: 1px;
+    line-height: 0px;
+}
+p
+{
+	margin-left:10px;
+}
+#fond_repeat{
+	background:url(img/fond_repeat.png) repeat-y  bottom right;
+}
+.haut {
+
+padding:42px;
+background: url(img/titre_news.png) no-repeat top right;
+}
+
+.gauche {
+
+background:url(img/fond_repeat.png) repeat-y top right;
+max-width:1600px;
+margin-bottom:40px;
+min-width:470px;
+}
+.droit {
+
+background: url(img/footer_news.png) no-repeat bottom right;
+padding-bottom:50px;
+
+}
+
+h2
+{
+	color:#FFF;
+	padding-left:10px;
+	width:450px;
+	padding-bottom:10px;
+}
+h3
+{
+	color:#FFF;
+	padding-top:14px;
+	width:400px;
+}
+.separator
+{
+	background:url(img/separator.png) repeat-x;
+	height:48px;
+	margin:8px 0px 8px 0px;
+}
+.separator_m
+{
+	background:url(img/separator_m.png) no-repeat;
+	height:76px;
+	margin:2px 0 2px 0;
+}
+.separator_m1
+{
+	background:url(img/menu.png) no-repeat;
+	height:76px;
+	margin:0 0 8px 0;
+}
+#synopsis,#episode_info
+{
+	color:#CCC;
+}
+
+
+label.info,label.liens
+{
+	color: #FC0;
+	font-weight:bold;
+	display: inline;
+ 	float: left;
+	width: 200px;
+}
+a.news_liens_dl, a.bbcode_url
+{
+	color:red;
+	font-size:15px;
+	font-weight:bold;
+}
+#liens_menu
+{
+	text-align:center;
+}
+#liens_menu a
+{
+	font-size:14px;
+	font-weight:bold;
+	color:#930;
+	text-decoration:none;
+}
+label.mort
+{
+	float:left;
+	width:250px;
+}
+.invisible
+{
+	display:none;
+}
+.submit{
+     border:none;
+     color:#fff;
+     background:url('./img/fond_bouton.png');
+     width:75px;
+     height:37px;
+}
+label.ident
+{
+	padding-right:40px;
+	color:#CCC;
+	width:100px;
+}
+#admin_conn
+{
+	padding-left:10px;
+}
+#admin_conn a
+{color: #CCC;text-align: center; text-decoration:underline; cursor:pointer; padding-left:10px; margin-bottom:3px;}
+.faux_lien
+{color: #CCC;text-align: center; text-decoration:underline; cursor:pointer; padding-left:10px; margin-bottom:3px;}
+.generate_time
+{
+	margin-top:-20px;
+	text-align:right;
+}
+.ep_pic {text-align:center; }
+.ep_pic img { padding: 15px; border: 1px solid #999; background-color: #000;}
+.ep_pic img {
+	-moz-border-radius: 10px; -webkit-border-radius: 10px;
+}

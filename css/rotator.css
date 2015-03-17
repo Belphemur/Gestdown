@@ -1,0 +1,36 @@
+* {margin: 0; padding: 0;}
+a img {border: 0;}
+a:active {outline:none;}
+a:focus {outline:none; -moz-outline-style:none;}
+.clear {clear: both;  display: block; }
+.clear_all {clear: both; display: block;}
+
+
+/*** Classes ***/
+#episode_list
+{
+	text-align:center;
+}
+.ep
+{
+	padding-bottom:5px;
+	padding-top:2px;
+	margin-bottom:5px;
+	background:url(http://style.gestdown.info/paginator.png) repeat-x;
+	width:110px;
+	display: inline-block;
+	text-decoration:underline;
+}
+.ep:hover
+{
+	background:url(http://style.gestdown.info/paginator_hover.png) repeat-x;
+}
+#episode_list a {color: #CCC;text-align: center; text-decoration:underline; cursor:pointer; padding-left:10px; margin-bottom:3px;
+}
+	
+
+#episode_list a.selected {color: #ed7c19; font-weight: bold;text-decoration:none; }
+#class_rotator {width: 100%; height: 210px; /*background-image: url('/modules/welcome/images/class_rotator_bg.jpg');*/ position: relative; text-align:center;}
+#class_rotator_wrapper {width: 100%; height: 200px; position: absolute; left: 3px; top: 11px; overflow: hidden;}
+#class_rotator_classes {width: 4000px; position: relative; text-align:center;}
+#class_rotator_classes img {display: block; float: left; margin-right: 10px; width: 80px; height: 103px; margin-top: 47px; cursor: pointer;}

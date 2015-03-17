@@ -1,0 +1,5 @@
+{
+  "require": {
+    "adyg/php-imgur-api-client": "dev-master"
+  }
+}

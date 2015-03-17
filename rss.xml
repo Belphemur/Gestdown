@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0">
+  <channel>
+    <title>Gestdown : Sorties de la Ame no Tsuki</title>
+    <link>http://www.gestdown.info/</link>
+    <description>Flux RSS contenant les dernières sorties de la Ame no Tsuki</description>
+    <pubDate>Tue, 28 Oct 2014 16:29:26 +0100</pubDate>
+    <language>fr-fr</language>
+    <image>
+      <url>http://imagidream.eu/ant/templates/sobre/images/apple-touch-icon.png</url>
+      <title>Gestdown : Sorties de la Ame no Tsuki</title>
+      <link>http://www.gestdown.info/</link>
+    </image>
+    <item>
+      <title>Episode 02 de Nanatsu no taizai</title>
+      <description><![CDATA[<img src="http://i.imgur.com/eZnDlvb.jpg?1" width=460  alt="Screen" /><br />Épée Sacrée]]></description>
+      <link>http://www.gestdown.info/ep-649.html</link>
+      <guid isPermaLink="false">ba613d1fc0d9300175611e31cca7cf9f525056cb</guid>
+      <pubDate>Tue, 28 Oct 2014 16:29:26 +0100</pubDate>
+      <author>balor@gestdown.info (Ame no Tsuki)</author>
+      <category>Nanatsu no taizai</category>
+    </item>
+    <item>
+      <title>Episode 01 de Nanatsu no taizai</title>
+      <description><![CDATA[<img src="http://i.imgur.com/2OnWguY.jpg?1" width=460  alt="Screen" /><br />Sept Péchés Capitaux]]></description>
+      <link>http://www.gestdown.info/ep-650.html</link>
+      <guid isPermaLink="false">d8502b7d774861547d38343645a9f52b163d08cd</guid>
+      <pubDate>Tue, 28 Oct 2014 16:28:05 +0100</pubDate>
+      <author>balor@gestdown.info (Ame no Tsuki)</author>
+      <category>Nanatsu no taizai</category>
+    </item>
+    <item>
+      <title>Episode 17 de Senyuu</title>
+      <description><![CDATA[<img src="http://i.imgur.com/0jWUhgn.jpg?1" width=460  alt="Screen" /><br />Le Héros est débordé]]></description>
+      <link>http://www.gestdown.info/ep-648.html</link>
+      <guid isPermaLink="false">1407c2b75f43d3691c240e28204533da74ee4054</guid>
+      <pubDate>Wed, 15 Oct 2014 14:29:22 +0200</pubDate>
+      <author>balor@gestdown.info (Ame no Tsuki)</author>
+      <category>Senyuu</category>
+    </item>
+    <item>
+      <title>Episode 24 de To Aru Kagaku no Railgun S</title>
+      <description><![CDATA[<img src="http://i.imgur.com/Q9q7yJN.jpg?1" width=460  alt="Screen" /><br />Eternal Party]]></description>
+      <link>http://www.gestdown.info/ep-645.html</link>
+      <guid isPermaLink="false">6d363479c97439b921ad2bcba054992d8eda9a0c</guid>
+      <pubDate>Fri, 04 Apr 2014 16:42:48 +0200</pubDate>
+      <author>balor@gestdown.info (Ame no Tsuki)</author>
+      <category>To Aru Kagaku no Railgun S</category>
+    </item>
+    <item>
+      <title>Episode 23 de To Aru Kagaku no Railgun S</title>
+      <description><![CDATA[<img src="http://i.imgur.com/gcT2vzm.jpg?1" width=460  alt="Screen" /><br />A l'aube d'une révolution(Silent Party)]]></description>
+      <link>http://www.gestdown.info/ep-646.html</link>
+      <guid isPermaLink="false">f333160e6b20ba37686da89bbe5fab728a7d3d24</guid>
+      <pubDate>Fri, 04 Apr 2014 16:42:12 +0200</pubDate>
+      <author>balor@gestdown.info (Ame no Tsuki)</author>
+      <category>To Aru Kagaku no Railgun S</category>
+    </item>
+    <item>
+      <title>Episode 22 de To Aru Kagaku no Railgun S</title>
+      <description><![CDATA[<img src="http://i.imgur.com/fZA3SrE.jpg?1" width=460  alt="Screen" /><br />STUDY]]></description>
+      <link>http://www.gestdown.info/ep-647.html</link>
+      <guid isPermaLink="false">68b5193fd0f5308baac9d9eed453a89e6925bcf9</guid>
+      <pubDate>Fri, 04 Apr 2014 16:38:29 +0200</pubDate>
+      <author>balor@gestdown.info (Ame no Tsuki)</author>
+      <category>To Aru Kagaku no Railgun S</category>
+    </item>
+    <item>
+      <title>Episode 07 de Noragami</title>
+      <description><![CDATA[<img src="http://i.imgur.com/d0jVQoJ.jpg?1" width=460  alt="Screen" /><br />Doute et Destinée]]></description>
+      <link>http://www.gestdown.info/ep-644.html</link>
+      <guid isPermaLink="false">df518c2e0702a3bec12b032911d3090d9bfef76c</guid>
+      <pubDate>Tue, 11 Mar 2014 18:13:38 +0100</pubDate>
+      <author>balor@gestdown.info (Ame no Tsuki)</author>
+      <category>Noragami</category>
+    </item>
+    <item>
+      <title>Episode 06 de Noragami</title>
+      <description><![CDATA[<img src="http://i.imgur.com/ZuUIiLv.jpg?1" width=460  alt="Screen" /><br />Personne effrayante]]></description>
+      <link>http://www.gestdown.info/ep-643.html</link>
+      <guid isPermaLink="false">431bf3b995a99c2cd6899b97187d1542a965cec9</guid>
+      <pubDate>Sun, 16 Feb 2014 17:29:41 +0100</pubDate>
+      <author>balor@gestdown.info (Ame no Tsuki)</author>
+      <category>Noragami</category>
+    </item>
+  </channel>
+</rss>

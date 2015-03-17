@@ -1,0 +1,23 @@
+# 1 YEAR
+<FilesMatch "\.(ico|pdf|flv)$">
+Header set Cache-Control "max-age=29030400, public"
+Header unset Expires
+</FilesMatch>
+# 1 MONTH
+#<FilesMatch "\.(txt|css|js)$">
+#Header set Cache-Control "max-age=2592000, proxy-revalidate, must-revalidate"
+#Header unset Expires
+#</FilesMatch>
+# 2 WEEK
+<FilesMatch "\.(jpg|jpeg|png|gif|swf|mp3)$">
+Header set Cache-Control "max-age=1209600, public"
+Header unset Expires
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^(.*\.(gif|jpg|jpeg|png|swf|css|js|html?|xml|txt))$ $1 [L]
+</FilesMatch>
+# 10 MIN
+<FilesMatch "\.(xml|html|htm|php)$">
+Header set Cache-Control "max-age=600, private, proxy-revalidate, must-revalidate"
+</FilesMatch>
+

@@ -1,0 +1,37 @@
+body{background-color:#f4f4f4;font-family:Arial, Helvetica, sans-serif;font-size:13px;color:#515151;}
+a{text-decoration:none;}
+.header{color:#0666ba;width:800px;margin:0 auto;}
+h1{text-align: center;}
+input[type=text]:focus {background-color:#f5f6ff;border:1px solid #969696;}
+textarea:focus {background-color:#f5f6ff;border:1px solid #969696;}
+.centregras{text-align: center;font-weight:bold;}
+.ssh, .logo, .ssh div, .menu div, .envoi, .envoyer, .cadre{float:left;}
+.ssh{margin-left:480px;margin-top:10px;}
+.ssh div{padding-left:13px;}
+.ssh div a{color:#0666ba;}
+.logo a{color:#f4f4f4;}
+.menu{background-image:url(http://static.miroriii.com/imgs/menu.png);background-repeat:no-repeat;background-position:bottom;width:875px;height:50px;padding-top:50px;!padding:0;margin:15px auto 0 auto;}
+.menu div{padding-left:35px;padding-top:17px;}
+.menu div a{color:#FFFFFF;}
+.middle{background-image:url(http://static.miroriii.com/imgs/cadre_milieu.png);width:850px;height:190px;margin:50px auto 0 auto;padding-left:5px;}
+.middle .envoi .txt{font-size:15px;font-weight:600;margin:58px 0 0 30px;}
+.middle .envoi .mini{font-size:10px;font-style:italic;margin-left:30px;}
+.middle .envoyer{margin:58px 0 0 45px;}
+.middle .envoyer .parcourir{height:31px;width:375px;}
+.deux_cadres{width:855px;margin:25px auto 0 auto;}
+#cadre_g{height:240px;width:350px;background-image:url(http://static.miroriii.com/imgs/cadre_gauche.png);margin-right:10px;}
+#cadre_d{height:240px;width:495px;}
+#cadre_g h1{padding:20px 0 0 20px;font-size:15px;font-weight:600;}
+.infos{width:300px;margin-left:20px;}
+.space{margin-top:10px;}
+.footer{color:#b9b8b8;font-weight:bold;width:300px;margin:50px auto 0 auto;font-size:10px;font-style:italic;padding-left:30px;}
+.block{background: url(http://static.miroriii.com/imgs/bg.png) #e6edf2 no-repeat bottom right;border:1px solid #d6e0e8;width:850px;margin:50px auto 0 auto;padding-left:5px;}
+a.button{display:-moz-inline-box;display:inline-block;margin:0;padding:0;font:14px Arial;white-space:nowrap;text-align:center;vertical-align:middle;cursor:pointer;border:0;background:none;}
+a.button span{position:relative;float:left;padding:0 0 0 12px;vertical-align:middle;background:url(http://static.miroriii.com/imgs/bouton_gauche.png) left top no-repeat;}
+a.button span span{padding:0 12px 0 0;background:url(http://static.miroriii.com/imgs/bouton_droit.png) right top no-repeat;}
+a.button span span span{width:250px;height:36px;padding:0;background:url(http://static.miroriii.com/imgs/bouton_centre.png) left top repeat-x;line-height:36px;}
+a.button1{display:-moz-inline-box;display:inline-block;margin:0;padding:0;font:14px Arial;color:white;white-space:nowrap;text-align:center;vertical-align:middle;cursor:pointer;border:0;background:none;}
+a.button1 span{position:relative;float:left;padding:0 0 0 12px;vertical-align:middle;background:url(http://static.miroriii.com/imgs/bouton_gauche1.png) left top no-repeat;}
+a.button1 span span{padding:0 12px 0 0;background:url(http://static.miroriii.com/imgs/bouton_droit1.png) right top no-repeat;}
+a.button1 span span span{width:250px;height:36px;padding:0;background:url(http://static.miroriii.com/imgs/bouton_centre1.png) left top repeat-x;line-height:36px;}
+.barre{background-color:#0992fc;background-repeat:no-repeat;background-image:url(http://static.miroriii.com/imgs/backgroundbarre.png);position:fixed;width:800px;height:30px;left:-400px;margin-left:50%;bottom:0;border-top:2px solid #056cbe;border-right:2px solid #056cbe;border-left:2px solid #056cbe;text-align:right;color:white;line-height:30px;vertical-align:middle;padding-right:10px;}

@@ -1,0 +1,208 @@
+
+
+
+            #haut_detail{
+                background:url(http://static.miroriii.com/images/haut_detail.png) no-repeat top left;
+                width:709px;
+                height:13px;
+                margin-right:auto;
+                margin-left:auto;
+                margin-bottom:-11px;
+            }
+
+            #detail{
+                background:url(http://static.miroriii.com/images/detail.png) repeat-x top left #e8e7e7;
+                width:677px;
+                border-left:1px solid #bfbebe;
+                border-right:1px solid #bfbebe;
+                padding:0 15px;
+                text-align:center;
+                margin-right:auto;
+                margin-left:auto;
+            }
+
+            h1{
+                font-weight:normal;
+                margin-bottom:-9px;
+                font-size:16px;
+            }
+
+            .fichier{
+                color:#0567c0;
+                font-weight:bold;
+            }
+
+            #bas_detail{
+                background:url(http://static.miroriii.com/images/ban_detail.png) no-repeat top left;
+                width:709px;
+                height:15px;
+                margin-right:auto;
+                margin-left:auto;
+            }
+
+            #acces{
+                background:url(http://static.miroriii.com/images/acces.jpg) repeat-x top left #e8ebed;
+                width:677px;
+                padding:10px 15px;
+                border:1px solid #bfbebe;
+            }
+
+            #acces a{
+                color:#515151;
+            }
+
+            #dl{
+                background:url(http://static.miroriii.com/images/dl.png) no-repeat top left;
+                height:34px;
+                padding-left:52px;
+                line-height:34px;
+                margin:0 auto;
+                color:#0567c0;
+                font-weight:bold;
+                width:200px;
+                font-size:16px;
+            }
+
+
+            #mirori{
+                background:url(http://static.miroriii.com/images/miroriii.png) no-repeat top left;
+                height:25px;
+                line-height:25px;
+                padding-left:400px;
+                width:650px;
+                margin:20px 0;
+
+            }
+
+            #RS{
+                background:url(http://static.miroriii.com/images/rs.png) no-repeat top left;
+                padding-left:400px;
+                height:30px;
+                width:650px;
+                line-height:30px;
+                margin:20px 0;
+                text-align:left;
+            }
+            #MI{
+                background:url(http://style.gestdown.info/mirorii.png) no-repeat top left;
+                padding-left:400px;
+                height:30px;
+                width:650px;
+                line-height:30px;
+                margin:20px 0;
+                text-align:left;
+            }
+
+            #MU{
+
+                background:url(http://static.miroriii.com/images/mu.png) no-repeat top left;
+                height:30px;
+                line-height:11px;
+                width:650px;
+                margin:20px 0;
+                padding-left:400px;
+                text-align:left;
+                line-height:30px;
+            }
+
+            .clear{
+                clear:both;
+            }
+
+
+            #MV{
+                background:url(http://static.miroriii.com/images/mv.png) no-repeat top left;
+                height:30px;
+                width:650px;
+                margin:20px 0;
+                padding-left:400px;
+                text-align:left;
+                line-height:30px;
+            }
+
+            #UP{
+                background:url(http://style.gestdown.info/uploading.png) no-repeat top left;
+                height:30px;
+                width:650px;
+                margin:20px 0;
+                padding-left:400px;
+                text-align:left;
+                line-height:30px;
+            }
+            #FS{
+                background:url(http://style.gestdown.info/fileserve.png) no-repeat top left;
+                height:35px;
+                width:650px;
+                margin:20px 0;
+                padding-left:400px;
+                text-align:left;
+                line-height:30px;
+            }
+            #FSC{
+                background:url(http://style.gestdown.info/filesonic.png) no-repeat top left;
+                height:35px;
+                width:650px;
+                margin:20px 0;
+                padding-left:400px;
+                text-align:left;
+                line-height:30px;
+            }
+            #FF{
+                background:url(http://style.gestdown.info/filefactory.png) no-repeat top left;
+                height:28px;
+                width:650px;
+                margin:20px 0;
+                padding-left:400px;
+                text-align:left;
+                line-height:30px;
+            }
+            #UL{
+                background:url(http://static.miroriii.com/images/uploaded.png) no-repeat top left;
+                height:30px;
+                width:650px;
+                margin:20px 0;
+                padding-left:400px;
+                text-align:left;
+                line-height:30px;
+            }
+
+            #HF{
+                background:url(http://static.miroriii.com/images/hotfile.png) no-repeat top left;
+                height:30px;
+                width:650px;
+                margin:20px 0;
+                padding-left:400px;
+                text-align:left;
+                line-height:30px;
+            }
+            #CN {
+                background:url(http://cdn2.cramit.in/logom.png) no-repeat top left;
+                height:30px;
+                width:650px;
+                margin:20px 0;
+                padding-left:400px;
+                text-align:left;
+                line-height:30px;
+            }
+
+            .droite{
+                float:left;
+                margin:0 auto;
+            }
+
+            .left{
+                color:#979696;
+                font-style: italic;
+                text-align:left;
+            }
+
+            .right{
+                text-align:left;
+            }
+
+            #infos{
+                background:url(http://static.miroriii.com/images/infos.png) repeat-x top left #e7ebef;
+                width:677px;
+                padding:10px 15px;
+                border:1px solid #d2d5d8;
+            }

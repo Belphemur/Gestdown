@@ -1,0 +1,206 @@
+#form
+{
+	position: relative;
+	height: 50px;
+}
+
+#searchbox
+{
+	position: relative;
+	border: 1px solid black;
+	height: 30px;
+	width: 495px;
+	font-size: 22px;
+	padding: 2px;
+	background-color: #333;
+	color:#999;
+}
+
+#buttonContainer
+{
+	position: absolute;
+	top: 3px;
+	left: 410px;
+}
+
+#resultsContainer
+{
+	border: 1px solid white;
+	display: none;
+	padding: 10px;
+	width: 480px;
+	background-color:#000;
+}
+
+.liens_search
+{
+	padding-top:10px;
+	text-align:left;
+}
+
+#resultsContainer a
+{
+
+	color: #ff4433;
+
+}
+
+.url-holder
+{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	position: relative;
+}
+
+.url-title
+{
+	font-size: 22px;
+}
+
+.url-desc
+{
+	font-size: 16px;
+	padding-right: 10px;
+	color:#FFF;
+}
+
+
+
+
+
+
+
+
+/*a.button {
+    background: transparent url('./img/buttons/bg_button_a_.png') no-repeat scroll top right;
+    color: #444;
+    display: block;
+    float: left;
+    font: normal 12px arial, sans-serif;
+    height: 24px;
+    margin-right: 6px;
+    padding-right: 10px;
+    text-decoration: none;
+	line-height: 14px;
+}
+*/
+a.button span {
+    background: transparent url('./img/buttons/bg_button_span_.png') no-repeat;
+    display: block;
+    line-height: 14px;
+    padding: 4px 13px 5px 13px;
+	font: normal 12px arial, sans-serif;
+	text-decoration: none;
+	color:white;
+	width:70px;
+	text-align:center;
+}
+
+a.button:active {
+    background-position: bottom right;
+    color: #000;
+    outline: none;
+}
+
+a.button:active span {
+    background-position: bottom left;
+    padding: 5px 13px 5px 13px;
+}
+
+.submit{
+     border:none;
+     color:#fff;
+     background:url('./img/fond_bouton.png');
+     width:75px;
+     height:37px;
+}
+
+.bbcode {		/* la div contenant l'éditeur */
+	border:#999999 solid 1px;
+	background-color: #EFEFEF;
+	width: 510px;
+}
+.prev { /* la div affichant la prévis */
+	width: 510px;
+	color:teal;
+	font-style:inherit;
+}
+
+.BBCodeBouton { /* la div contenant toutes les "balises" de {b] à [/size] */
+	height: 70px;
+}
+.BBCodeBouton input, .BBCodeBouton select {
+	border: #666666 solid 1px;
+	margin-left: 5px;
+}
+
+.BBCodeSubmit { /* la div div contenant les 2 submit "Envoie" et "Prévisu." */
+	padding-top: 5px;
+	padding-bottom: 5px;
+	text-align: center;
+}
+
+.BBCodeSubmit input { border: #666666 outset 1px; background-color: #EFEFEF; margin-left: 20px; }
+.BBCodeSubmit input:hover { border: #CCCCCC solid 1px; }
+.BBCodeSubmit input:active { border: #666666 inset 1px; }
+
+#SubBB {	/* Bouton Standard des balises : [B], [i], [u], [url], [img], [quote], [code], [list] */
+	height: 28px;
+}
+
+#SubBB input { border: #666666 outset 1px; }
+#SubBB input:hover { border: #CCCCCC solid 1px; background-color: #FFFFFF; }
+#SubBB input:active { border: #666666 inset 1px; background-color: #EFEFEF; }
+
+#SelColBB, #SelColBB select {		/* Les Selects des balises [color] et [bgcolor] choix de couleur de police ou de fond de police */
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 9px;
+	height: 16px;
+}
+
+#SelColBB {
+	height: 18px;
+}
+
+#SelFontBB, #SelFontBB select { 	/* Selects [font] choix de police */
+	display: inline;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 9px;
+	height: 16px;
+	left: 5px;
+}
+
+#SelSizeBB, #SelSizeBB select {	/* Selects [size] choix de taille de police */
+	display: inline;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 9px;
+	height: 16px;
+	left: 10px;
+}
+
+#SelFontBB,#SelSizeBB {
+	height: 18px;
+}
+
+.BBCodeArea {  /* la div contenant le textarea */
+	margin-left: 2.5px;
+}
+
+#text {		/* Le textarea (la ou on tape des lettres ^^') */
+}
+
+label.form {
+display:block;
+width:150px;
+float:left;
+}
+
+label.liens {
+display:block;
+width:110px;
+float:left;
+font-size:14px;
+font-weight:normal;
+color:white;
+margin-left:15px;
+}

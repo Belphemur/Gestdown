@@ -1,0 +1,7 @@
+Vous voici sur notre page de téléchargement à gauche vous trouverez tous les animes que nous fansubbons et leurs liens.
+
+[b][size=4]Et ci-dessous vous trouverez les derniers épisodes qui ont été uppés par notre team.[/size][/b]
+Et voila la V3 de Gestdown est en ligne. Codé par Balor de A->Z autant le design, que le code source :).
+Alors l'interface a quelque peu changée mais si vous avez fait joujou avec la page de projet, vous comprendrez rapidement ^^.
+
+[color=orange]Alors petit rappel, au dessus vous avez toutes les miniatures de nos Série en Cours et Terminées. De même que a Gauche vous avez les liens. Chaque clic sur les liens ou sur la miniature vous amène a la série avec son listing des épisodes, vous n'avez plus qu'a cliquer sur l'épisode que vous voulez :)[/color]

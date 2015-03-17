@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sorties team="Ame no Tsuki">
+  <episode>
+    <id>649</id>
+    <titre>Episode 02</titre>
+    <serie>Nanatsu no taizai</serie>
+  </episode>
+  <episode>
+    <id>650</id>
+    <titre>Episode 01</titre>
+    <serie>Nanatsu no taizai</serie>
+  </episode>
+  <episode>
+    <id>648</id>
+    <titre>Episode 17</titre>
+    <serie>Senyuu</serie>
+  </episode>
+  <episode>
+    <id>645</id>
+    <titre>Episode 24</titre>
+    <serie>To Aru Kagaku no Railgun S</serie>
+  </episode>
+  <episode>
+    <id>646</id>
+    <titre>Episode 23</titre>
+    <serie>To Aru Kagaku no Railgun S</serie>
+  </episode>
+  <episode>
+    <id>647</id>
+    <titre>Episode 22</titre>
+    <serie>To Aru Kagaku no Railgun S</serie>
+  </episode>
+  <episode>
+    <id>644</id>
+    <titre>Episode 07</titre>
+    <serie>Noragami</serie>
+  </episode>
+  <episode>
+    <id>643</id>
+    <titre>Episode 06</titre>
+    <serie>Noragami</serie>
+  </episode>
+  <episode>
+    <id>642</id>
+    <titre>Episode 05</titre>
+    <serie>Noragami</serie>
+  </episode>
+  <episode>
+    <id>641</id>
+    <titre>Episode 04</titre>
+    <serie>Noragami</serie>
+  </episode>
+</sorties>

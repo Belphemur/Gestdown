@@ -1,0 +1,5 @@
+# htpasstool v1.0 protected
+AuthType Basic
+AuthName "Restricted Area"
+AuthUserFile "/var/www/clients/client1/web2/web/xml//.htpasswd"
+require valid-user
