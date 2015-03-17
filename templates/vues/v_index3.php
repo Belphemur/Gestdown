@@ -19,7 +19,7 @@
 
 <header>
     <div class="logo">
-        <a href="index.php"><img src="static/img/logo.png" title="Magnetic" alt="Magnetic"/></a>
+        <a href="index.php"><img src="static/img/logo.png" title="Gestdown" alt="Gestdown"/></a>
     </div>
     <!-- end logo -->
 

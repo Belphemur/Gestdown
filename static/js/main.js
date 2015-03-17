@@ -1,7 +1,13 @@
+function getHashFilter() {
+    var hash = location.hash;
+    // get filter=filterName
+    var matches = location.hash.match( /filter=([^&]+)/i );
+    var hashFilter = matches && matches[1];
+    return hashFilter && decodeURIComponent( hashFilter );
+}
+var isIsotopeInit = false;
+
 $(document).ready(function(){
-    var selected = $("nav .selected");
-
-
 
     //mobile menu toggling
     $("#menu_icon").click(function(){
@@ -73,25 +79,45 @@ $(document).ready(function(){
     });
 
 
-    jQuery(window).load(function() {
+
+
+
+    var isIsotopeInit = false;
+
+    function onHashchange() {
+        var hashFilter = getHashFilter();
+        if ( !hashFilter && isIsotopeInit ) {
+            return;
+        }
+        isIsotopeInit = true;
+        // filter isotope
         $('#series').isotope({
             columnWidth: 200,
-            itemSelector: '.work'
+            itemSelector: '.work',
+            filter: hashFilter
         });
-    });
-    $('nav').on( 'click', 'a', function() {
+        // set selected class on button
+        if ( hashFilter ) {
+            $("nav").find('.selected').removeClass('selected');
+            $("nav").find('[data-filter="' + hashFilter + '"]').addClass('selected');
+        }
+    }
+
+    $('nav').on( 'click', 'a', function(e) {
+        e.preventDefault();
         var filterValue = $(this).attr('data-filter');
         if(filterValue) {
-            if(selected) {
-                selected.removeClass("selected")
-            }
-            $(this).addClass("selected");
             $('#series').isotope({filter: filterValue});
-            selected = $(this);
+            // set filter in hash
+            location.hash = 'filter=' + encodeURIComponent( filterValue );
         }
     });
 
+    $(window).on( 'hashchange', onHashchange );
 
+    jQuery(window).load(function() {
+        onHashchange();
+    });
 });
 
 
