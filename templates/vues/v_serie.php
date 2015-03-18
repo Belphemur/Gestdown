@@ -1,3 +1,15 @@
+<?php
+    $serie = $this->serie->execute();
+    $previousUrl = null;
+    $nextUrl = null;
+    if(!empty($serie->previous)) {
+        $previousUrl = "serie-".$serie->previous->id."-".$this->clean($serie->previous->nom).".html";
+    }
+    if(!empty($serie->next)) {
+        $nextUrl = "serie-".$serie->next->id."-".$this->clean($serie->next->nom).".html";
+    }
+
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -14,6 +26,15 @@
     <script type="text/javascript" src="static/js/main.js"></script>
     <meta name="google-site-verification" content="u5EBaJ0m7q4fc-P3XpHv1qbduymAfNqcEuCJoMJ88kE"/>
     <meta name="msvalidate.01" content="2014CE1E3D3BAD4B6218115A64DBD92F"/>
+    <style media="all" type="text/css">
+    .top {
+        background:  url('<?php echo $serie->img ?>') no-repeat;
+        background-size: cover;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+    }
+    </style>
 </head>
 <body>
 
@@ -26,12 +47,12 @@
     <div id="menu_icon"></div>
     <nav>
         <ul>
-            <li><a href="index.php">Home</a></li>
-            <li><a class="filter selected" data-filter="*" href="#">Toutes les Séries</a></li>
-            <li><a class="filter" data-filter=".ongoing" href="#">En Cours</a></li>
-            <li><a class="filter" data-filter=".ended" href="#">Terminées</a></li>
-            <li><a class="filter" data-filter=".licencie" href="#">Licenciées</a></li>
-            <li><a class="filter" data-filter=".abandon" href="#">Abandonnées</a></li>
+            <li><a class="selected" href="index.php">Home</a></li>
+            <li><a class="filter" data-filter="*" href="index.php#filter=*">Toutes les Séries</a></li>
+            <li><a class="filter" data-filter=".ongoing" href="index.php#filter=.ongoing">En Cours</a></li>
+            <li><a class="filter" data-filter=".ended" href="index.php#filter=.ended">Terminées</a></li>
+            <li><a class="filter" data-filter=".licencie" href="index.php#filter=.licencie">Licenciées</a></li>
+            <li><a class="filter" data-filter=".abandon" href="index.php#filter=.abandon">Abandonnées</a></li>
         </ul>
     </nav>
     <!-- end navigation menu -->
@@ -64,19 +85,30 @@
             <div class="work_nav">
 
                 <ul class="btn clearfix">
-                    <li><a href="#" class="previous" data-title="Previous"></a></li>
+                    <?php if(!empty($previousUrl)) {
+                        echo <<<EOF
+                    <li><a href="$previousUrl" class="previous" data-title="{$serie->previous->nom}"></a></li>
+EOF;
+                    }
+?>
+
                     <li><a href="index.php" class="grid" data-title="Series"></a></li>
-                    <li><a href="#" class="next" data-title="Next"></a></li>
+                    <?php if(!empty($nextUrl)) {
+                        echo <<<EOF
+                    <li><a href="$nextUrl" class="next" data-title="{$serie->next->nom}"></a></li>
+EOF;
+                    }
+                    ?>
                 </ul>
 
             </div><!-- end work_nav -->
-            <h1 class="title">Sed do eiusmod tempor incididunt ut labore et dolore seed magna aliqua.</h1>
+            <h1 class="title"><?php echo $serie->nom ?></h1>
         </div>
     </section><!-- end top -->
 
     <section class="wrapper">
         <div class="content">
-            <p>Nunc pellentesque mauris ut magna pulvinar, quis fermentum tellus pulvinar. Curabitur ut fermentum quam. Nam tincidunt sagittis neque in elementum. Fusce convallis cursus porta. Curabitur dapibus pretium leo, at laoreet magna ullamcorper ac. Integer quam nulla, fringilla ac imperdiet at, consequat vel leo. Quisque non semper justo, eu aliquam velit. Pellentesque rhoncus, quam ac fringilla euismod, ligula diam congue orci, id cursus dui velit quis ligula.</p>
+            <p><?php echo $serie->synopsis ?></p>
 
 
             <h2>Nulla nec pellentesque tempus, ipsum arcu aliquam tortor.</h2>

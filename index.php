@@ -26,7 +26,8 @@ if (isset($_GET['ext'])) {
 EOF;
         $viewFile="v_serie";
     } else if (isset($_GET['serie'])) {
-        $titre .= "Série -  ";
+        $vue->serie = new Serie($id,$db);
+        $titre .= $vue->serie->getNom();
         $viewFile="v_serie.php";
     }
 } else {

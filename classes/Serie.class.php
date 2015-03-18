@@ -1,119 +1,127 @@
 <?php
 require_once("interfaces/module.interface.php");
 require_once("Result.class.php");
+
 class Serie implements Module
 {
-    private $id,$db,$result,$lite, $noEps;
-    //Construit la "série" et vérifie qu'avec les info données c'est possible
-    function __construct($id,$db,$lite=false)
+    private $id, $db, $result, $noEps, $next, $previous;
+
+    /**
+     * @param $id
+     * @param EzDB $db
+     * @param bool $lite
+     * @throws Error
+     */
+    function __construct($id, EzDB $db)
     {
         $this->debut_t = microtime(true);
-        $this->id=$id;
-        $this->db=$db;
-        $this->lite=$lite;
+        $this->id = $id;
+        $this->db = $db;
         $this->isValid();
     }
+
     function __destruct()
     {
         unset($this->db);
     }
+
     function execTime()
     {
-        return  round(microtime(true) - $this->debut_t,4);
+        return round(microtime(true) - $this->debut_t, 4);
     }
+
     function isValid()
     {
-        $sql="SELECT c.nom cat_nom,c.image img, d.nom ep, d.id
+        $sql = "SELECT c.finie, c.licencie, c.stopped, c.nom cat_nom,c.image img, c.description synopsis, d.nom ep, d.id, d.description, d.screen, d.lien mq, d.lien2 hd, d.lien3 fhd
 		FROM downloads d
 		INNER JOIN categorie c
 		ON c.id=d.categorie
 		WHERE d.categorie=? AND d.actif=1
-		ORDER BY d.id";
-        if($this->lite)
-            $sql="SELECT c.nom cat_nom, d.nom ep, d.id
-			FROM downloads d
-			INNER JOIN categorie c
-			ON c.id=d.categorie
-			WHERE d.categorie=?
-			ORDER BY d.id";	
-        if(!is_numeric($this->id))
-        {
-            throw new Error('L\'identifiant doit être un nombre',1);
-            return false;
+		ORDER BY d.nom ASC,d.id ASC";
+
+        $sqlNextSerie = "SELECT nom, id FROM categorie WHERE nom > ? ORDER BY nom ASC LIMIT 1";
+        $sqlPreviousSerie = "SELECT nom, id FROM categorie WHERE nom < ? ORDER BY nom DESC LIMIT 1";
+
+        if (!is_numeric($this->id)) {
+            throw new Error('L\'identifiant doit être un nombre', 1);
         }
-        else if(! $this->db->pQuery($sql,array('i',$this->id)))
-        {
-            $sql="SELECT c.nom cat_nom,c.image img
+
+        if (!$this->db->pQuery($sql, array('i', $this->id))) {
+            $sql = "SELECT c.finie, c.licencie, c.stopped, c.nom cat_nom,c.image img, c.description synopsis
 		FROM categorie c
 		WHERE c.id=?";
-            if(! $this->db->pQuery($sql,array('i',$this->id)))
-            {
-                throw new Error('Aucun résultat pour cette série',2);
-                return false;
+            if (!$this->db->pQuery($sql, array('i', $this->id))) {
+                throw new Error('Aucun résultat pour cette série', 2);
+            } else {
+                $this->noEps = true;
+                $this->result = $this->db->getResults(false, false);
             }
-            else
-            {
-                $this->noEps=true;
-                $this->result=$this->db->getResults(false,false);
-                return true;
-            }
+        } else {
+            $this->noEps = false;
+            $this->result = $this->db->getResults(false, false);
         }
-        else
-        {
-            $this->noEps=false;
-            $this->result=$this->db->getResults(false,false);
-            return true;
-        }
+        if ($this->db->pQuery($sqlNextSerie, array("s", $this->getNom())))
+            $this->next = $this->db->getRow();
+        if ($this->db->pQuery($sqlPreviousSerie, array("s", $this->getNom())))
+            $this->previous = $this->db->getRow();
+
+        return true;
     }
+
+    /**
+     * @return String
+     */
     function getNom()
     {
         return $this->result[0]['cat_nom'];
+    }
+
+    /**
+     * @return String
+     */
+    function  getImage()
+    {
+        return $this->result[0]['img'];
+    }
+
+    /**
+     * @return String
+     */
+    function getSynopsis()
+    {
+        return stripcslashes($this->result[0]['synopsis']);
     }
     //Fonction qui suivant un caneva donné génère le code html pour les épisodes
     //Le caneva doit contenenir les mot suivant : $nom, $img, $episode, $star
     function execute()
     {
-        $return=new Result();
+        $return = new stdClass();
 
-        if(!$this->lite)
-        {
-            $return->nom=$this->result[0]['cat_nom'];
-            $return->img=$this->result[0]['img'];
-            $ratingManager = RatingManager::getInstance();
-            $return->stars=$ratingManager->drawStars($this->id);
-        }
-        else
-            $return->catnom=$this->result[0]['cat_nom'];
-        if(!$this->noEps)
-        {
-            $output="";
-            $template="<a href=\"ep-%d.html\" class=\"\" id=\"%d\"><div class=\"ep\">%s</div></a>\n";
-            $compteur=0;
-
-            foreach($this->result as $episode =>$ep)
-            {
-                if($compteur==4)
-                {
-                    $output.= sprintf($template,$ep['id'],$ep['id'],$ep['ep']).'<br />';
-                    $compteur=0;
-                }
-                else
-                {
-                    $output.= sprintf($template,$ep['id'],$ep['id'],$ep['ep']);
-                    $compteur++;
-                }
+        $return->nom = $this->getNom();
+        $return->img = $this->getImage();
+        $return->synopsis = $this->getSynopsis();
+        $return->next = $this->next;
+        $return->previous = $this->previous;
+        $episodes = [];
+        if (!$this->noEps) {
+            foreach ($this->result as $episode) {
+                $ep = new stdClass();
+                $ep->id = $episode['id'];
+                $ep->number = $episode['ep'];
+                $ep->title = $episode['description'];
+                $ep->screen = $episode['screen'];
+                $ep->mq = $episode['mq'];
+                $ep->hd = $episode['hd'];
+                $ep->fhd = $episode['fhd'];
+                $episodes[] = $ep;
             }
-            $return->episode=$output;
         }
-        else
-            $return->episode="Aucun pour le moment.";
+        $return->episodes = $episodes;
 
-        if(!$this->lite)
-            $return->exectime=$this->execTime();
-        else
-            $return->catexectime=$this->execTime();
+        $return->exectime = $this->execTime();
 
         return $return;
     }
 }
+
 ?>
