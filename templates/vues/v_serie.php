@@ -54,7 +54,6 @@
     <link rel="stylesheet" type="text/css" href="static/css/reset.css">
     <link rel="stylesheet" type="text/css" href="static/css/main.css">
     <script type="text/javascript" src="static/js/jquery.js"></script>
-    <script type="text/javascript" src="static/js/isotope.pkgd.min.js"></script>
     <script type="text/javascript" src="static/js/jquery.cycle2.min.js"></script>
     <script type="text/javascript" src="static/js/main.js"></script>
     <meta name="google-site-verification" content="u5EBaJ0m7q4fc-P3XpHv1qbduymAfNqcEuCJoMJ88kE"/>
