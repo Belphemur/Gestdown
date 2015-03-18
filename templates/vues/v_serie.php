@@ -31,12 +31,14 @@
     }
     $info = $serie->info;
     $screens = "";
-    $templateImg = '<img src="%s">';
+    $templateImg = '<img src="%s" />';
     $nbScreen = count($serie->episodes);
-    $firstScreen = sprintf($templateImg, $serie->episodes[0]->screen);
-    for($i = 1; $i < $nbScreen; $i++) {
-        $episode = $serie->episodes[$i];
-        $screens.= sprintf($templateImg, $episode->screen) . PHP_EOL;
+    if($nbScreen > 0) {
+        $firstScreen = sprintf($templateImg, $serie->episodes[0]->screen);
+        for ($i = 1; $i < $nbScreen; $i++) {
+            $episode = $serie->episodes[$i];
+            $screens .= sprintf($templateImg, $episode->screen) . PHP_EOL;
+        }
     }
 
 ?>
@@ -177,21 +179,13 @@ EOF;
                $screens
             </script>
 EOF;
+            } else {
+                echo <<<EOF
+                <p></p>
+EOF;
+
             }
         ?>
-
-            <p>vel tempus libero diam vel arcu. Etiam id tincidunt tortor. Nam auctor consequat quam, vel mattis dui laoreet a. Nunc condimentum iaculis tortor, id eleifend nulla mattis lobortis. Pellentesque semper blandit odio, id tempor lorem imperdiet eu. Ut sagittis sagittis consectetur ,Maecenas eget risus eros. Nunc venenatis ante a rutrum cursus.</p>
-
-
-            <p>Commodo at blandit vitae, placerat in sem. Morbi ornare nec felis in euismod. Suspendisse vulputate orci ultrices enim facilisis, vel lobortis magna rhoncus. Integer mattis at elit vitae adipiscing. Cras imperdiet cursus nunc quis ullamcorper.</p>
-
-
-            <h1>H1 : Quisque non semper justo</h1>
-            <h2>H2 : Quisque non semper justo</h2>
-            <h3>H3 : Quisque non semper justo</h3>
-            <h4>H4 : Quisque non semper justo</h4>
-            <h5>H5 : Quisque non semper justo</h5>
-            <h6>H6 : Quisque non semper justo</h6>
         </div><!-- end content -->
     </section>
 </section><!-- end main -->
