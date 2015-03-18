@@ -30,6 +30,14 @@
 
     }
     $info = $serie->info;
+    $screens = "";
+    $templateImg = '<img src="%s">';
+    $nbScreen = count($serie->episodes);
+    $firstScreen = sprintf($templateImg, $serie->episodes[0]->screen);
+    for($i = 1; $i < $nbScreen; $i++) {
+        $episode = $serie->episodes[$i];
+        $screens.= sprintf($templateImg, $episode->screen) . PHP_EOL;
+    }
 
 ?>
 <!DOCTYPE html>
@@ -45,6 +53,7 @@
     <link rel="stylesheet" type="text/css" href="static/css/main.css">
     <script type="text/javascript" src="static/js/jquery.js"></script>
     <script type="text/javascript" src="static/js/isotope.pkgd.min.js"></script>
+    <script type="text/javascript" src="static/js/jquery.cycle2.min.js"></script>
     <script type="text/javascript" src="static/js/main.js"></script>
     <meta name="google-site-verification" content="u5EBaJ0m7q4fc-P3XpHv1qbduymAfNqcEuCJoMJ88kE"/>
     <meta name="msvalidate.01" content="2014CE1E3D3BAD4B6218115A64DBD92F"/>
@@ -148,10 +157,28 @@ EOF;
 
                 ?>
             </p>
+            <?php
+            if($nbScreen > 0) {
+                echo <<<EOF
+            <h2>Screenshots</h2>
 
-            <h2>Quisque non semper justo</h2>
-
-            <p>Commodo at blandit vitae, placerat in sem. Morbi ornare nec felis in euismod. Suspendisse vulputate orci ultrices enim facilisis, vel lobortis magna rhoncus. Integer mattis at elit vitae adipiscing. Cras imperdiet cursus nunc quis ullamcorper.</p>
+           <p><div class="cycle-slideshow auto screenshots"
+                   data-cycle-fx=scrollHorz
+                   data-cycle-timeout=2000
+                   data-cycle-caption=".caption"
+                   data-cycle-caption-template="{{slideNum}} /  $nbScreen"
+                   data-cycle-loader=true
+                   data-cycle-progressive="#screenshots"
+                >
+                $firstScreen
+            </div>
+            </p>
+            <script id="screenshots" type="text/cycle">
+               $screens
+            </script>
+EOF;
+            }
+        ?>
 
             <p>vel tempus libero diam vel arcu. Etiam id tincidunt tortor. Nam auctor consequat quam, vel mattis dui laoreet a. Nunc condimentum iaculis tortor, id eleifend nulla mattis lobortis. Pellentesque semper blandit odio, id tempor lorem imperdiet eu. Ut sagittis sagittis consectetur ,Maecenas eget risus eros. Nunc venenatis ante a rutrum cursus.</p>
 

@@ -64,11 +64,11 @@ class Serie implements Module
                 throw new Error('Aucun résultat pour cette série', 2);
             } else {
                 $this->noEps = true;
-                $this->result = $this->db->getResults(false, false);
+                $this->result = $this->db->getResults();
             }
         } else {
             $this->noEps = false;
-            $this->result = $this->db->getResults(false, false);
+            $this->result = $this->db->getResults();
         }
         if ($this->db->pQuery($sqlNextSerie, array("s", $this->getNom())))
             $this->next = $this->db->getRow();
@@ -83,11 +83,11 @@ class Serie implements Module
      */
     function getInformations() {
         $info = new stdClass();
-        $info->annee = $this->result[0]['annee'];
-        $info->auteur = $this->result[0]['auteur'];
-        $info->episodes= $this->result[0]['episode'];
-        $info->genre = $this->result[0]['genre'];
-        $info->studio = $this->result[0]['studio'];
+        $info->annee = $this->result[0]->annee;
+        $info->auteur = $this->result[0]->auteur;
+        $info->episodes= $this->result[0]->episode;
+        $info->genre = $this->result[0]->genre;
+        $info->studio = $this->result[0]->studio;
         return $info;
     }
 
@@ -96,7 +96,7 @@ class Serie implements Module
      */
     function getNom()
     {
-        return $this->result[0]['cat_nom'];
+        return $this->result[0]->cat_nom;
     }
 
     /**
@@ -104,7 +104,7 @@ class Serie implements Module
      */
     function  getImage()
     {
-        return $this->result[0]['img'];
+        return $this->result[0]->img;
     }
 
     /**
@@ -113,11 +113,11 @@ class Serie implements Module
     function getStatus()
     {
         $status = Serie::STATUS_ONGOING;
-        if($this->result[0]['licencie']) {
+        if($this->result[0]->licencie) {
             $status = Serie::STATUS_LICENCED;
-        } elseif($this->result[0]['finie']) {
+        } elseif($this->result[0]->finie) {
             $status = Serie::STATUS_ENDED;
-        } elseif($this->result[0]['stopped']) {
+        } elseif($this->result[0]->stopped) {
             $status = Serie::STATUS_ABANDON;
         }
         return $status;
@@ -128,7 +128,7 @@ class Serie implements Module
      */
     function getSynopsis()
     {
-        return stripcslashes($this->result[0]['synopsis']);
+        return stripcslashes($this->result[0]->synopsis);
     }
     //Fonction qui suivant un caneva donné génère le code html pour les épisodes
     //Le caneva doit contenenir les mot suivant : $nom, $img, $episode, $star
@@ -147,13 +147,13 @@ class Serie implements Module
         if (!$this->noEps) {
             foreach ($this->result as $episode) {
                 $ep = new stdClass();
-                $ep->id = $episode['id'];
-                $ep->number = $episode['ep'];
-                $ep->title = $episode['description'];
-                $ep->screen = $episode['screen'];
-                $ep->mq = $episode['mq'];
-                $ep->hd = $episode['hd'];
-                $ep->fhd = $episode['fhd'];
+                $ep->id = $episode->id;
+                $ep->number = $episode->ep;
+                $ep->title = $episode->description;
+                $ep->screen = $episode->screen;
+                $ep->mq = $episode->mq;
+                $ep->hd = $episode->hd;
+                $ep->fhd = $episode->fhd;
                 $episodes[] = $ep;
             }
         }

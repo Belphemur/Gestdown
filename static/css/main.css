@@ -642,3 +642,8 @@ h5, h6          { font-weight: bolder }
 
 .content div.serieInfo {
 }
+
+.content .screenshots {
+    max-width: 460px;
+    min-width: 20%;
+}
