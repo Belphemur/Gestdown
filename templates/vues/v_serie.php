@@ -29,6 +29,7 @@
             break;
 
     }
+    $info = $serie->info;
 
 ?>
 <!DOCTYPE html>
@@ -129,12 +130,24 @@ EOF;
 
     <section class="wrapper">
         <div class="content">
+
             <p><?php echo $serie->synopsis ?></p>
 
+            <h2>Informations</h2>
 
-            <h2>Nulla nec pellentesque tempus, ipsum arcu aliquam tortor.</h2>
+            <p>
+                <?php
+                    echo <<<EOF
+                <div class="serieInfo"><label class="info">Année de Production : </label><p class="info">{$info->annee}</p></div>
+                <div class="serieInfo"><label class="info">Studio(s) : </label><p class="info">{$info->studio}</p></div>
+                <div class="serieInfo"><label class="info">Genre(s) : </label><p class="info">{$info->genre}</p></div>
+                <div class="serieInfo"><label class="info">Auteur(s) : </label><p class="info">{$info->auteur}</p></div>
+                <div class="serieInfo"><label class="info">Type et Durée : </label><p class="info">{$info->episodes}</p></div>
+                (Source : <a href="http://www.animeka.com/" title="Animeka" target="_blank">Animeka</a>)
+EOF;
 
-            <p>vel tempus libero diam vel arcu. Etiam id tincidunt tortor. Nam auctor consequat quam, vel mattis dui laoreet a. Nunc condimentum iaculis tortor, id eleifend nulla mattis lobortis. Pellentesque semper blandit odio, id tempor lorem imperdiet eu. Ut sagittis sagittis consectetur ,Maecenas eget risus eros. Nunc venenatis ante a rutrum cursus.</p>
+                ?>
+            </p>
 
             <h2>Quisque non semper justo</h2>
 
