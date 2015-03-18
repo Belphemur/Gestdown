@@ -86,6 +86,9 @@ class ezDB {
             throw new Exception('ezDB ERROR: connect() -> Cant connect to DB : ' . mysqli_connect_error(), mysqli_connect_errno());
     }
 
+    /**
+     * @return EzDB
+     */
     public static function getInstance() {
         if (!isset(self::$instance))
         {

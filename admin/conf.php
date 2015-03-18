@@ -110,7 +110,7 @@ function __autoload($classname){
 
 DEFINE('TEMPLATE', './includes/template.php');
 
-//$db= new ezDB();
+
 $db= ezDB::getInstance();
 // Specify a cache dir. Path is taken from calling script
 //$db->enableDiskCache($diskCache,$timeout);
