@@ -32,7 +32,7 @@ EOF;
     }
 } else {
     $titre = "Gestdown : Centralisation des épisodes de la Ame no Tsuki [AnT]";
-    $series = $db->getResults("SELECT id,nom,image, finie, licencie,stopped FROM categorie WHERE nom!='Prob de lien' ORDER BY nom ASC");
+    $series = $db->getResults("SELECT id,nom,image, finie, licencie,stopped, width, height FROM categorie WHERE nom!='Prob de lien' ORDER BY nom ASC");
     $vue->series = $series;
     $viewFile="v_index3.php";
 }

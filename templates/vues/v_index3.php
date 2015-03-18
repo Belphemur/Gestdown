@@ -12,6 +12,7 @@
     <script type="text/javascript" src="static/js/jquery.js"></script>
     <script type="text/javascript" src="static/js/isotope.pkgd.min.js"></script>
     <script type="text/javascript" src="static/js/main.js"></script>
+    <script type="text/javascript" src="static/js/lazysizes.min.js"></script>
     <script type="text/javascript" src="static/js/series-display.js"></script>
     <meta name="google-site-verification" content="u5EBaJ0m7q4fc-P3XpHv1qbduymAfNqcEuCJoMJ88kE"/>
     <meta name="msvalidate.01" content="2014CE1E3D3BAD4B6218115A64DBD92F"/>
@@ -77,7 +78,7 @@
             echo <<<EOF
 		<div class="work $classes">
 			<a href="serie-{$serie->id}-{$this->clean($serie->nom)}.html">
-				<img src="$serie->image" class="media" alt=""/>
+				<img data-sizes="auto" width="$serie->width" height="$serie->height" class="lazyload media" data-src="$serie->image"  alt=""/>
 				<div class="caption">
 					<div class="work_title">
 						<h1 class="name">$serie->nom</h1>

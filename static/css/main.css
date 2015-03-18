@@ -296,6 +296,7 @@ h5, h6          { font-weight: bolder }
 .main .work .media{
     width: 100%;
     vertical-align: middle;
+    height: 100%;
 }
 
 .main .work .caption{
@@ -646,4 +647,9 @@ h5, h6          { font-weight: bolder }
 .content .screenshots {
     max-width: 460px;
     min-width: 20%;
+}
+
+#series img  {
+    max-width: 100%;
+    height: auto;
 }

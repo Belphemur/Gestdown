@@ -8,11 +8,6 @@ function getHashFilter() {
     var hashFilter = matches && matches[1];
     return hashFilter && decodeURIComponent( hashFilter );
 }
-var isIsotopeInit = false;
-
-
-
-
 
 var isIsotopeInit = false;
 
@@ -26,7 +21,10 @@ function onHashchange() {
     $('#series').isotope({
         columnWidth: 200,
         itemSelector: '.work',
-        filter: hashFilter
+        filter: hashFilter,
+        onLayout: function() {
+            //$(window).trigger("scroll");
+        }
     });
     // set selected class on button
     if ( hashFilter ) {
@@ -37,18 +35,20 @@ function onHashchange() {
 
 $(window).on( 'hashchange', onHashchange );
 
-$(window).load(function() {
-    onHashchange();
-});
 
 $(document).ready(function() {
     $('nav').on('click', 'a', function (e) {
-        e.preventDefault();
         var filterValue = $(this).attr('data-filter');
         if (filterValue) {
+            e.preventDefault();
             $('#series').isotope({filter: filterValue});
             // set filter in hash
             location.hash = 'filter=' + encodeURIComponent(filterValue);
         }
+    });
+
+    var $imgs = $("#series img.lazyload");
+    $imgs.load(function(){
+        onHashchange();
     });
 });
