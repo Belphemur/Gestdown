@@ -2,7 +2,9 @@
 require_once 'header.php';
 include ('./templates/links.html'); 
 include ('../includes/animeka.php');
-include ('../includes/addSerieXml.php');?>
+include ('../includes/addSerieXml.php');
+require_once('../includes/imagesize.php')
+?>
 <div id="content">
     <h2>Ajouter une Série</h2>
     <p>
@@ -44,8 +46,9 @@ include ('../includes/addSerieXml.php');?>
                     $$index = trim($valeur);
                 }
 
-                $sql = "INSERT INTO categorie VALUES (NULL, ? , ?, ?,0,0,0)";
-                $res = $db->preparedQuery($sql, array("sss",$nom,$description,$image));          
+                $sql = "INSERT INTO `categorie` (`nom`, `description`, `image`, `finie`, `licencie`, `stopped`, `width`, `height`) VALUES ( ?, ?, ?, '0', '0', '0', ?, ?);";
+                $img = getImageDimension($image);
+                $res = $db->preparedQuery($sql, array("sssii",$nom,$description,$image,$img->width, $img->height));
                 $id=$db->getLastID();
                 $serie=$nom;
                 $nom=str_replace(" - ","-",$nom);

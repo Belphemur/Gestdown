@@ -2,10 +2,7 @@
 require_once 'header.php';
 include ('./templates/links.html');
 include ('../includes/animeka.php');
-unset($db);
-$db = ezDB::getInstance();
-$db->connect($sql_serveur, $sql_login, $sql_pass, $sql_bdd);
-$db->query("SET NAMES 'utf8'");
+require_once ('../includes/imagesize.php');
 if (isset($_POST['id'])) {
 ?>
     <div id="content">
@@ -37,8 +34,9 @@ if (isset($_POST['id'])) {
             }
             try {
 
-                $sql = "UPDATE categorie SET nom=?, description=?, image=?, finie=? WHERE id=?";
-                $res = $db->pQuery($sql, array('sssii', $nom, $description, $image, $finie, $id));
+                $sql = "UPDATE categorie SET nom=?, description=?, image=?, finie=?, width=?, height=? WHERE id=?";
+                $img = getImageDimension($image);
+                $res = $db->pQuery($sql, array('sssiiii', $nom, $description, $image, $finie,$img->width,$img->height,$id));
                 if (isset($_POST['animeka']) && $_POST['animeka'] != '') {
                     $url = $_POST['animeka'];
                     $result = new Result();
