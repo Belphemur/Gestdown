@@ -36,12 +36,26 @@
     </nav>
     <!-- end navigation menu -->
 
+    <div class="footer clearfix">
+        <ul class="social clearfix">
+            <li><a href="#" class="fb" data-title="Facebook"></a></li>
+            <li><a href="#" class="google" data-title="Google +"></a></li>
+            <li><a href="#" class="behance" data-title="Behance"></a></li>
+            <!--<li><a href="#" class="twitter" data-title="Twitter"></a></li>
+            <li><a href="#" class="dribble" data-title="Dribble"></a></li>-->
+            <li><a href="#" class="rss" data-title="RSS"></a></li>
+        </ul>
+        <!-- end social -->
+
         <div class="rights">
             <p>Copyright © 2014 magnetic.</p>
+
             <p>Template by <a href="">Pixelhint.com</a></p>
-        </div><!-- end rights -->
-    </div ><!-- end footer -->
-</header><!-- end header -->
+        </div>
+        <!-- end rights -->
+    </div>
+    <!-- end footer -->
+</header>
 
 <section class="main clearfix">
 
@@ -51,7 +65,7 @@
 
                 <ul class="btn clearfix">
                     <li><a href="#" class="previous" data-title="Previous"></a></li>
-                    <li><a href="index.html" class="grid" data-title="Portfolio"></a></li>
+                    <li><a href="index.php" class="grid" data-title="Series"></a></li>
                     <li><a href="#" class="next" data-title="Next"></a></li>
                 </ul>
 
