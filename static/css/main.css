@@ -609,3 +609,23 @@ h5, h6          { font-weight: bolder }
         width: 100%;
     }
 }
+
+.status {
+    float: right;
+}
+
+.title .ongoing {
+    color: green;
+}
+
+.title .ended {
+    color:#0000CC;
+}
+
+.title .licenced {
+    color:#cd0a0a;
+}
+
+.title .abandon {
+    color:#c77405;
+}

@@ -4,6 +4,10 @@ require_once("Result.class.php");
 
 class Serie implements Module
 {
+    const STATUS_ONGOING = 1;
+    const STATUS_LICENCED = 2;
+    const STATUS_ENDED = 3;
+    const STATUS_ABANDON = 4;
     private $id, $db, $result, $noEps, $next, $previous;
 
     /**
@@ -85,6 +89,22 @@ class Serie implements Module
     }
 
     /**
+     * @return Serie::STATUS_*
+     */
+    function getStatus()
+    {
+        $status = Serie::STATUS_ONGOING;
+        if($this->result[0]['licencie']) {
+            $status = Serie::STATUS_LICENCED;
+        } elseif($this->result[0]['finie']) {
+            $status = Serie::STATUS_ENDED;
+        } elseif($this->result[0]['stopped']) {
+            $status = Serie::STATUS_ABANDON;
+        }
+        return $status;
+    }
+
+    /**
      * @return String
      */
     function getSynopsis()
@@ -102,6 +122,7 @@ class Serie implements Module
         $return->synopsis = $this->getSynopsis();
         $return->next = $this->next;
         $return->previous = $this->previous;
+        $return->status = $this->getStatus();
         $episodes = [];
         if (!$this->noEps) {
             foreach ($this->result as $episode) {

@@ -8,6 +8,27 @@
     if(!empty($serie->next)) {
         $nextUrl = "serie-".$serie->next->id."-".$this->clean($serie->next->nom).".html";
     }
+    $status;
+    $statusClass;
+    switch($serie->status) {
+        case Serie::STATUS_ONGOING:
+            $status = 'En Cours';
+            $statusClass = "ongoing";
+            break;
+        case Serie::STATUS_ENDED:
+            $status = 'Finie';
+            $statusClass = "ended";
+            break;
+        case Serie::STATUS_ABANDON:
+            $status = 'Abandonnée';
+            $statusClass = "abandon";
+            break;
+        case Serie::STATUS_LICENCED:
+            $status = 'Licenciée';
+            $statusClass = "licenced";
+            break;
+
+    }
 
 ?>
 <!DOCTYPE html>
@@ -102,7 +123,7 @@ EOF;
                 </ul>
 
             </div><!-- end work_nav -->
-            <h1 class="title"><?php echo $serie->nom ?></h1>
+            <h1 class="title"><?php echo $serie->nom ?><p class="status <?php echo $statusClass ?>">(<?php echo $status ?>)</p></h1>
         </div>
     </section><!-- end top -->
 
