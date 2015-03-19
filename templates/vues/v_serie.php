@@ -33,13 +33,16 @@
     $screens = "";
     $templateImg = '<img src="%s" />';
     $nbScreen = count($serie->episodes);
+    $totalDl =0;
     if($nbScreen > 0) {
         $firstScreen = sprintf($templateImg, $serie->episodes[0]->screen);
         for ($i = 1; $i < $nbScreen; $i++) {
             $episode = $serie->episodes[$i];
+            $totalDl+=$episode->dl;
             $screens .= sprintf($templateImg, $episode->screen) . PHP_EOL;
         }
     }
+    $jsonEpisode = json_encode($serie->episodes);
 
 ?>
 <!DOCTYPE html>
@@ -53,9 +56,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0"/>
     <link rel="stylesheet" type="text/css" href="static/css/reset.css">
     <link rel="stylesheet" type="text/css" href="static/css/main.css">
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.5/css/jquery.dataTables.css">
     <script type="text/javascript" src="static/js/jquery.js"></script>
     <script type="text/javascript" src="static/js/jquery.cycle2.min.js"></script>
     <script type="text/javascript" src="static/js/main.js"></script>
+    <script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.5/js/jquery.dataTables.min.js"></script>
     <meta name="google-site-verification" content="u5EBaJ0m7q4fc-P3XpHv1qbduymAfNqcEuCJoMJ88kE"/>
     <meta name="msvalidate.01" content="2014CE1E3D3BAD4B6218115A64DBD92F"/>
     <style media="all" type="text/css">
@@ -69,7 +74,29 @@
     </style>
 </head>
 <body>
-
+<?php
+if ($nbScreen> 0) {
+    ?>
+    <script type="text/plain" id="jsonepisodes">
+        <?php echo ($jsonEpisode) ?>
+    </script>
+    <script type="application/javascript">
+        var $records = $('#jsonepisodes'),
+            myRecords = JSON.parse($records.text());
+        $(document).ready(function () {
+           $('#episodes').dataTable({
+                data: myRecords,
+               "columns": [
+                   { "data": "nombre" },
+                   { "data": "titre" },
+                   { "data": "dl" }
+               ]
+            });
+        });
+    </script>
+<?php
+}
+?>
 <header>
     <div class="logo">
         <a href="index.php"><img src="static/img/logo.png" title="Gestdown" alt="Gestdown"/></a>
@@ -154,6 +181,7 @@ EOF;
                 <div class="serieInfo"><label class="info">Auteur(s) : </label><p class="info">{$info->auteur}</p></div>
                 <div class="serieInfo"><label class="info">Type et Durée : </label><p class="info">{$info->episodes}</p></div>
                 (Source : <a href="http://www.animeka.com/" title="Animeka" target="_blank">Animeka</a>)
+                <div class="serieInfo"><label class="info">Nombre de téléchargement : </label><p class="info">{$totalDl}</p></div>
 EOF;
 
                 ?>
@@ -177,7 +205,18 @@ EOF;
             <script id="screenshots" type="text/cycle">
                $screens
             </script>
+            <h2>Episodes</h2>
+            <table id="episodes" class="table table-bordered">
+              <thead>
+                <th>Episode</th>
+                <th>Titre</th>
+                <th>Téléchargements</th>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
 EOF;
+
             } else {
                 echo <<<EOF
                 <p></p>

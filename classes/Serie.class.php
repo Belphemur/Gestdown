@@ -36,12 +36,12 @@ class Serie implements Module
 
     function isValid()
     {
-        $sql = "SELECT c.finie, c.licencie, c.stopped, c.nom cat_nom,c.image img, c.description synopsis, d.nom ep, d.id, d.description, d.screen, d.lien mq, d.lien2 hd, d.lien3 fhd,
+        $sql = "SELECT c.finie, c.licencie, c.stopped, c.nom cat_nom,c.image img, c.description synopsis, d.nom ep, d.nbhits,  d.id, d.description, d.screen, d.lien mq, d.lien2 hd, d.lien3 fhd,
         i.annee, i.auteur, i.episode, i.genre, i.studio
 		FROM downloads d
 		INNER JOIN categorie c
 		ON c.id=d.categorie
-		INNER JOIN informations i
+		LEFT JOIN informations i
 		ON c.id = i.cat_id
 		WHERE d.categorie=? AND d.actif=1
 		ORDER BY d.nom ASC,d.id ASC";
@@ -57,7 +57,7 @@ class Serie implements Module
             $sql = "SELECT c.finie, c.licencie, c.stopped, c.nom cat_nom,c.image img, c.description synopsis,
         i.annee, i.auteur, i.episode, i.genre, i.studio
 		FROM categorie c
-		INNER JOIN informations i
+		LEFT JOIN informations i
 		ON c.id = i.cat_id
 		WHERE c.id=?";
             if (!$this->db->pQuery($sql, array('i', $this->id))) {
@@ -148,12 +148,13 @@ class Serie implements Module
             foreach ($this->result as $episode) {
                 $ep = new stdClass();
                 $ep->id = $episode->id;
-                $ep->number = $episode->ep;
-                $ep->title = $episode->description;
+                $ep->nombre = $episode->ep;
+                $ep->titre = $episode->description;
                 $ep->screen = $episode->screen;
                 $ep->mq = $episode->mq;
                 $ep->hd = $episode->hd;
                 $ep->fhd = $episode->fhd;
+                $ep->dl = $episode->nbhits;
                 $episodes[] = $ep;
             }
         }
