@@ -4,16 +4,21 @@
 function getHashFilter() {
     var hash = location.hash;
     // get filter=filterName
-    var matches = location.hash.match( /filter=([^&]+)/i );
+    var matches = location.hash.match(/filter=([^&]+)/i);
     var hashFilter = matches && matches[1];
-    return hashFilter && decodeURIComponent( hashFilter );
+    return hashFilter && decodeURIComponent(hashFilter);
 }
 
 var isIsotopeInit = false;
+window.lazySizesConfig = window.lazySizesConfig || {};
+window.lazySizesConfig.loadMode  = 1;
+function onHashchange(forced) {
+    if (typeof forced === 'undefined') {
+        forced = false
+    }
 
-function onHashchange() {
     var hashFilter = getHashFilter();
-    if ( !hashFilter && isIsotopeInit ) {
+    if (!forced && !hashFilter && isIsotopeInit) {
         return;
     }
     isIsotopeInit = true;
@@ -22,21 +27,20 @@ function onHashchange() {
         columnWidth: 200,
         itemSelector: '.work',
         filter: hashFilter,
-        onLayout: function() {
+        onLayout: function () {
             //$(window).trigger("scroll");
         }
     });
     // set selected class on button
-    if ( hashFilter ) {
+    if (hashFilter) {
         $("nav").find('.selected').removeClass('selected');
         $("nav").find('[data-filter="' + hashFilter + '"]').addClass('selected');
     }
 }
 
-$(window).on( 'hashchange', onHashchange );
+$(window).on('hashchange', onHashchange);
 
-
-$(document).ready(function() {
+$(document).ready(function () {
     $('nav').on('click', 'a', function (e) {
         var filterValue = $(this).attr('data-filter');
         if (filterValue) {
@@ -48,7 +52,10 @@ $(document).ready(function() {
     });
 
     var $imgs = $("#series img.lazyload");
-    $imgs.load(function(){
-        onHashchange();
+    $imgs.load(function () {
+        $imgs.imagesLoaded(function(){
+            onHashchange(true);
+        });
+
     });
 });

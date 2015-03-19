@@ -12,6 +12,7 @@
     <script type="text/javascript" src="static/js/jquery.js"></script>
     <script type="text/javascript" src="static/js/isotope.pkgd.min.js"></script>
     <script type="text/javascript" src="static/js/main.js"></script>
+    <script type="text/javascript" src="static/js/imagesloaded.pkgd.min.js"></script>
     <script type="text/javascript" src="static/js/lazysizes.min.js"></script>
     <script type="text/javascript" src="static/js/series-display.js"></script>
     <meta name="google-site-verification" content="u5EBaJ0m7q4fc-P3XpHv1qbduymAfNqcEuCJoMJ88kE"/>
