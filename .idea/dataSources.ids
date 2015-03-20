@@ -51,8 +51,6 @@
       <column name="width" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <column name="height" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="id"/>
-      <exported-key name="fk_dl" table="directdownloads" schema="" catalog="c1mysql" columns="episode"/>
-      <exported-key name="FK_categorie" table="downloads" schema="" catalog="c1mysql" columns="categorie"/>
       <index name="nom" unique="false" columns="nom"/>
     </table>
     <table name="descriptions" schema="" catalog="c1mysql" type="TABLE">
@@ -70,7 +68,6 @@
       <column name="type" sqlType="VARCHAR" precision="5" scale="0" nullable="false" jdbcType="12"/>
       <column name="filepath" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="id"/>
-      <foreign-key name="fk_dl" columns="episode" ref-table="categorie" ref-schema="" ref-catalog="c1mysql" ref-columns="id" update-rule="3" delete-rule="0" deferrability="2"/>
       <index name="unique_episode" unique="true" columns="episode"/>
       <index name="unique_filepath" unique="true" columns="filepath"/>
     </table>
@@ -91,8 +88,6 @@
       <column name="actif" sqlType="TINYINT UNSIGNED" precision="3" scale="0" nullable="false" jdbcType="-6" def="Mg=="/>
       <column name="nbhits" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
       <column name="mort" sqlType="TINYINT UNSIGNED" precision="3" scale="0" nullable="false" jdbcType="-6" def="MA=="/>
-      <foreign-key name="FK_categorie" columns="categorie" ref-table="categorie" ref-schema="" ref-catalog="c1mysql" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-      <index name="FK_categorie" unique="false" columns="categorie"/>
     </table>
     <table name="informations" schema="" catalog="c1mysql" type="TABLE">
       <column name="cat_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
