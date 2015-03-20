@@ -3,7 +3,7 @@
  */
 
 function generateLink(id, quality) {
-    return '<a class="dlLink" href="dl-{0}-{1}.html">Lien</a>'.split('{0}').join(id).split("{1}").join(quality);
+    return '<a target="_blank" class="dlLink" href="dl-{0}-{1}.html">Lien</a>'.split('{0}').join(id).split("{1}").join(quality);
 }
 function renderLink(data, row, quality) {
     if (data) {
