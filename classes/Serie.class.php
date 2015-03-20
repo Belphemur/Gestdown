@@ -38,12 +38,12 @@ class Serie implements Module
     {
         $sql = "SELECT c.finie, c.licencie, c.stopped, c.nom cat_nom,c.image img, c.description synopsis, d.nom ep, d.nbhits,  d.id, d.description, d.screen, d.lien mq, d.lien2 hd, d.lien3 fhd,
         i.annee, i.auteur, i.episode, i.genre, i.studio
-		FROM downloads d
-		INNER JOIN categorie c
+		FROM categorie c
+		LEFT JOIN downloads d
 		ON c.id=d.categorie
 		LEFT JOIN informations i
 		ON c.id = i.cat_id
-		WHERE d.categorie=? AND d.actif=1
+		WHERE c.id=? AND d.actif=1
 		ORDER BY d.nom ASC,d.id ASC";
 
         $sqlNextSerie = "SELECT nom, id FROM categorie WHERE nom > ? AND nom != 'Prob de lien' ORDER BY nom ASC LIMIT 1";

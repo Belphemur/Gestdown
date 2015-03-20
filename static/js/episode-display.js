@@ -35,14 +35,56 @@ $.extend($.fn.dataTableExt.oSort, {
     }
 });
 
+$.fn.dataTable.Api.register('hideColumns()',
+    function () {
+        /**
+         * This plugin hides the columns that are empty.
+         * If you are using datatable inside jquery tabs
+         * you have to add manually this piece of code
+         * in the tabs initialization
+         * $("#mytable").datatables().fnAdjustColumnSizing();
+         * where #mytable is the selector of table
+         * object pointing to this plugin.
+         * This plugin can be invoked from
+         * <a href="//legacy.datatables.net/ref#fnInitComplete">fnInitComplete</a> callback.
+         * @author John Diaz
+         * @version 1.0
+         * @date 06/28/2013
+         */
+
+        var table = this.table();
+        $(table.node()).find('th').each(function (i) {
+
+            var rows = $(this).parents('table').find('tr td:nth-child(' + (i + 1) + ')'); //Find all rows of each column
+            var rowsLength = $(rows).length;
+            var emptyRows = 0;
+
+            rows.each(function (r) {
+                if (this.innerHTML == '')
+                    emptyRows++;
+            });
+
+            if (emptyRows == rowsLength) {
+                $(this).addClass("never");
+            }
+        });
+        
+    });
+
+
 $(document).ready(function () {
     var $records = $('#jsonepisodes'),
         myRecords = JSON.parse($records.text());
-    $('#episodes').dataTable({
+    var table = $('#episodes').dataTable({
         data: myRecords,
+        responsive: true,
+        initComplete: function () {
+            var api = this.api();
+            api.table().hideColumns();
+        },
         "columns": [
             {"data": "nombre", "type": "episode"},
-            {"data": "id", visible: false},
+            {"data": "id", visible:false ,className: "never"},
             {"data": "titre"},
             {"data": "dl"},
             {

@@ -9,26 +9,13 @@ if (isset($_GET['id']))
     $id = $_GET['id'];
 $header_js = "";
 if (isset($_GET['ext'])) {
+    $vue->serie = new Serie($id,$db);
+    $titre .= $vue->serie->getNom();
+    $viewFile="v_serie.php";
     if (isset($_GET['ep'])) {
-        $result = episode($id, true);
-        $synopsis = $result->html;
-        $meta_desc = $result->nom . " traduit par la Ame no Tsuki [AnT]";
-        $titre .= $result->nom;
-        $id = $result->catId;
-        $header_js = <<<EOF
-		<script type="text/javascript">
-		$(document).ready(function(){
-            $(document.body).animate({
-            'scrollTop':   $('#ep-$id').offset().top
-        }, 2000);
-		});
-		</script>
-EOF;
-        $viewFile="v_serie";
+
     } else if (isset($_GET['serie'])) {
-        $vue->serie = new Serie($id,$db);
-        $titre .= $vue->serie->getNom();
-        $viewFile="v_serie.php";
+
     }
 } else {
     $titre = "Gestdown : Centralisation des épisodes de la Ame no Tsuki [AnT]";

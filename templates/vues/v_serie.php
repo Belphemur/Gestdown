@@ -57,13 +57,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0"/>
     <link rel="stylesheet" type="text/css" href="static/css/reset.css">
     <link rel="stylesheet" type="text/css" href="static/css/main.css">
-    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.5/css/jquery.dataTables.css">
-    <script type="text/javascript" src="static/js/jquery.js"></script>
-    <script type="text/javascript" src="static/js/jquery.cycle2.min.js"></script>
-    <script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.5/js/jquery.dataTables.min.js"></script>
 <?php
 if ($nbScreen > 0) {
 ?>
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.5/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/responsive/1.0.4/css/dataTables.responsive.css">
+    <script type="text/javascript" src="static/js/jquery.js"></script>
+    <script type="text/javascript" src="static/js/jquery.cycle2.min.js"></script>
+    <script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.5/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" language="javascript" src="//cdn.datatables.net/responsive/1.0.4/js/dataTables.responsive.js"></script>
     <script type="text/javascript" language="javascript" src="static/js/episode-display.js"></script>
 <?php
 }
@@ -200,7 +202,7 @@ EOF;
                $screens
             </script>
             <h2>Episodes</h2>
-            <table id="episodes" class="table table-bordered">
+            <table id="episodes" class="table table-bordered" width="100%">
               <thead>
                 <th>Episode</th>
                 <th>id</th>
