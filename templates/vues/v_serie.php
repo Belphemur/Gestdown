@@ -235,6 +235,13 @@ EOF;
         </div><!-- end content -->
     </section>
 </section><!-- end main -->
+<?php
+if($nbScreen > 0) {
+?>
+    <script src="//api.peer5.com/peer5.js?id=z142i5n5qypq4cxr" type="application/javascript"></script>
+<?php
+}
+?>
 <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
