@@ -116,9 +116,10 @@ if (isset($_POST['id'])) {
 
                 $dl = $id;
                 $bbcode_lien_template = '<textarea name="" cols="65" rows="10" readonly="readonly">[color=orange]' . stripcslashes($description) . '[/color]' . "\n\n" . '[ALIGN=center][img]' . $screen . '[/img][/ALIGN]' . "\n\n";
-                $bbcode_lien = "[u][color=red]" . $cat . " " . $nom . "[/color][/u]" . "\n";
+                $bbcode_lien = "[u][color=red]" . $cat . " " . $nom . "[/color][/u] - " . "\n";
+                $bbcode_lien.= 'Episode : [url=' . $url_site . 'ep-' . $dl . '.html]Gestdown[/url]' . "\n";
 
-                if (!empty($lienMQ))
+                /*if (!empty($lienMQ))
                     $bbcode_lien .= 'MQ : [url=' . $url_site . 'dl-' . $dl . '-mq.html]Jheberg MQ[/url]' . "\n";
 
                 if (!empty($lienHD))
@@ -132,7 +133,7 @@ if (isset($_POST['id'])) {
                 if (!empty($torrentHD))
                     $bbcode_lien .= 'Torrent HD : [url=' . $url_site . 'tor-' . $dl . '-hd.html]Torrent HD[/url]' . "\n";
                 if (!empty($torrentFHD))
-                    $bbcode_lien .= 'Torrent FHD : [url=' . $url_site . 'tor-' . $dl . '-fhd.html]Torrent FHD[/url]' . "\n";
+                    $bbcode_lien .= 'Torrent FHD : [url=' . $url_site . 'tor-' . $dl . '-fhd.html]Torrent FHD[/url]' . "\n";*/
 
                 echo $msg_ok, 'Voici les liens BBCODE à mettre de la news : <br />';
                 echo $bbcode_lien_template, $bbcode_lien, '</textarea>';

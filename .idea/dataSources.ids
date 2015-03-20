@@ -63,12 +63,10 @@
       <primary-key name="PRIMARY" columns="id"/>
     </table>
     <table name="directdownloads" schema="" catalog="c1mysql" type="TABLE">
-      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="episode" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="type" sqlType="VARCHAR" precision="5" scale="0" nullable="false" jdbcType="12"/>
       <column name="filepath" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
-      <primary-key name="PRIMARY" columns="id"/>
-      <index name="unique_episode" unique="true" columns="episode"/>
+      <primary-key name="PRIMARY" columns="episode,type"/>
       <index name="unique_filepath" unique="true" columns="filepath"/>
     </table>
     <table name="downloads" schema="" catalog="c1mysql" type="TABLE">
