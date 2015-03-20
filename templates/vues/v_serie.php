@@ -36,6 +36,7 @@
     $totalDl =0;
     if($nbScreen > 0) {
         $firstScreen = sprintf($templateImg, $serie->episodes[0]->screen);
+        $totalDl += $serie->episodes[0]->dl;
         for ($i = 1; $i < $nbScreen; $i++) {
             $episode = $serie->episodes[$i];
             $totalDl+=$episode->dl;
