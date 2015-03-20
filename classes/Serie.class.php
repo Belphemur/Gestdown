@@ -81,11 +81,12 @@ class Serie implements Module
     /**
      * @return stdClass
      */
-    function getInformations() {
+    function getInformations()
+    {
         $info = new stdClass();
         $info->annee = $this->result[0]->annee;
         $info->auteur = $this->result[0]->auteur;
-        $info->episodes= $this->result[0]->episode;
+        $info->episodes = $this->result[0]->episode;
         $info->genre = $this->result[0]->genre;
         $info->studio = $this->result[0]->studio;
         return $info;
@@ -113,11 +114,11 @@ class Serie implements Module
     function getStatus()
     {
         $status = Serie::STATUS_ONGOING;
-        if($this->result[0]->licencie) {
+        if ($this->result[0]->licencie) {
             $status = Serie::STATUS_LICENCED;
-        } elseif($this->result[0]->finie) {
+        } elseif ($this->result[0]->finie) {
             $status = Serie::STATUS_ENDED;
-        } elseif($this->result[0]->stopped) {
+        } elseif ($this->result[0]->stopped) {
             $status = Serie::STATUS_ABANDON;
         }
         return $status;
@@ -151,9 +152,9 @@ class Serie implements Module
                 $ep->nombre = $episode->ep;
                 $ep->titre = $episode->description;
                 $ep->screen = $episode->screen;
-                $ep->mq = $episode->mq;
-                $ep->hd = $episode->hd;
-                $ep->fhd = $episode->fhd;
+                $ep->mq = !empty($episode->mq);
+                $ep->hd = !empty($episode->hd);
+                $ep->fhd = !empty($episode->fhd);
                 $ep->dl = $episode->nbhits;
                 $episodes[] = $ep;
             }
