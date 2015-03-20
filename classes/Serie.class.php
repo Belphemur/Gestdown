@@ -46,8 +46,8 @@ class Serie implements Module
 		WHERE d.categorie=? AND d.actif=1
 		ORDER BY d.nom ASC,d.id ASC";
 
-        $sqlNextSerie = "SELECT nom, id FROM categorie WHERE nom > ? ORDER BY nom ASC LIMIT 1";
-        $sqlPreviousSerie = "SELECT nom, id FROM categorie WHERE nom < ? ORDER BY nom DESC LIMIT 1";
+        $sqlNextSerie = "SELECT nom, id FROM categorie WHERE nom > ? AND nom != 'Prob de lien' ORDER BY nom ASC LIMIT 1";
+        $sqlPreviousSerie = "SELECT nom, id FROM categorie WHERE nom < ? AND nom != 'Prob de lien' ORDER BY nom DESC LIMIT 1";
 
         if (!is_numeric($this->id)) {
             throw new Error('L\'identifiant doit être un nombre', 1);
