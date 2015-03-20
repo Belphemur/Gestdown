@@ -653,3 +653,8 @@ h5, h6          { font-weight: bolder }
     max-width: 100%;
     height: auto;
 }
+
+.content table tr.epSelected,  .content table tr.epSelected a {
+    background-color: #0000F0;
+    color:white;
+}

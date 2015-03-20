@@ -81,6 +81,13 @@ $(document).ready(function () {
         initComplete: function () {
             var api = this.api();
             api.table().hideColumns();
+            if($("#episodeId").length) {
+                var id = parseInt($("#episodeId").text());
+                $('#ep-'+id).addClass("epSelected");
+                $("html, body").animate({
+                    'scrollTop':   $('#ep-'+id).offset().top
+                }, 2000);
+            }
         },
         "columns": [
             {"data": "nombre", "type": "episode"},

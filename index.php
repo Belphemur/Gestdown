@@ -13,14 +13,15 @@ if (isset($_GET['ext'])) {
         $viewFile = "v_serie.php";
         if (isset($_GET['ep'])) {
             $ep = new Episode($id, $db);
+            $vue->episodeId = $id;
+            $vue->serie = new Serie($ep->getCatId(), $db);
         } else if (isset($_GET['serie'])) {
             $vue->serie = new Serie($id, $db);
-            $titre .= $vue->serie->getNom();
-
         } else {
             throw new Error("problem");
         }
-    }catch (Error $e) {
+        $titre .= $vue->serie->getNom();
+    } catch (Error $e) {
         $titre = "Gestdown : Not Found";
         $viewFile = "v_404.php";
     }
@@ -28,7 +29,7 @@ if (isset($_GET['ext'])) {
     $titre = "Gestdown : Centralisation des épisodes de la Ame no Tsuki [AnT]";
     $series = $db->getResults("SELECT id,nom,image, finie, licencie,stopped, width, height FROM categorie WHERE nom!='Prob de lien' ORDER BY nom ASC");
     $vue->series = $series;
-    $viewFile="v_index3.php";
+    $viewFile = "v_index3.php";
 }
 $vue->header_js = $header_js;
 $vue->titre = $titre;

@@ -92,6 +92,14 @@ if ($nbScreen > 0) {
 
 <?php
 }
+
+if(isset($this->episodeId)) {
+?>
+    <script type="text/plain" id="episodeId">
+        <?php echo $this->episodeId ?>
+    </script>
+<?php
+}
 ?>
 <header>
     <div class="logo">
