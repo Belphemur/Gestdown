@@ -9,13 +9,20 @@ if (isset($_GET['id']))
     $id = $_GET['id'];
 $header_js = "";
 if (isset($_GET['ext'])) {
-    $vue->serie = new Serie($id,$db);
-    $titre .= $vue->serie->getNom();
-    $viewFile="v_serie.php";
-    if (isset($_GET['ep'])) {
+    try {
+        $viewFile = "v_serie.php";
+        if (isset($_GET['ep'])) {
+            $ep = new Episode($id, $db);
+        } else if (isset($_GET['serie'])) {
+            $vue->serie = new Serie($id, $db);
+            $titre .= $vue->serie->getNom();
 
-    } else if (isset($_GET['serie'])) {
-
+        } else {
+            throw new Error("problem");
+        }
+    }catch (Error $e) {
+        $titre = "Gestdown : Not Found";
+        $viewFile = "v_404.php";
     }
 } else {
     $titre = "Gestdown : Centralisation des épisodes de la Ame no Tsuki [AnT]";

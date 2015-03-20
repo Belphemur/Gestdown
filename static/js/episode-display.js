@@ -68,7 +68,7 @@ $.fn.dataTable.Api.register('hideColumns()',
                 $(this).addClass("never");
             }
         });
-        
+
     });
 
 
