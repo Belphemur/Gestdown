@@ -5,6 +5,10 @@ require_once("Result.class.php");
 
 class Episode implements Module
 {
+    const QUALITY_MQ = 'MQ';
+    const QUALITY_HD = 'HD';
+    const QUALITY_FHD = 'FHD';
+
     private $id,$db,$result;
     //Construit "l'épisode" et vérifie qu'avec les info données c'est possible
     function __construct($id,ezDB $db)

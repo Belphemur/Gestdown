@@ -77,19 +77,25 @@ function sendFileToJheberg($name)
     $data = json_decode($result);
     if(empty($data->url)) {
         echo "Problem while uploading the episode <br />";
-    } else if (addEpisodeDB($name, $data->url)) {
-        moveEpsiode($name, $file_name_with_full_path);
+    } else {
+        $episodeId = addEpisodeDB($name, $data->url);
+        if($episodeId == -1) {
+            return;
+        }
+        moveEpsiode($name, $file_name_with_full_path, $episodeId);
     }
 }
 
 /**
  * @param $name
- * @param $episodeDir
  * @param $file_name_with_full_path
+ * @param $epiId
+ * @return string
+ * @internal param $episodeDir
  */
-function moveEpsiode($name, $file_name_with_full_path)
+function moveEpsiode($name, $file_name_with_full_path, $epiId)
 {
-    global $episodeDir;
+    global $episodeDir, $episodeHttpPath, $db;
     $serie = '';
     list($num, $serie, $qual) = linkInformations($name, true);
     $fullPath = $episodeDir . '/' . $serie;
@@ -97,6 +103,11 @@ function moveEpsiode($name, $file_name_with_full_path)
     $newName = $fullPath . '/' . $name;
     rename($file_name_with_full_path, $newName);
     chmod($newName, 0775);
+    $dlPath = $episodeHttpPath . '/' . $serie . '/' . $name;
+    $sql = "INSERT INTO `DirectDownloads` (`id`, `episode`, `type`, `filepath`) VALUES (NULL, ?, ?, ?);";
+    if(!$db->pQuery($sql,array('iss',$epiId,$qual,$dlPath))) {
+        echo 'Impossible de définir le DDL';
+    }
 }
 
 function addEpisodeDB($file, $link)
@@ -130,6 +141,7 @@ function addEpisodeDB($file, $link)
                 (NULL, (SELECT c.id FROM categorie c WHERE c.nom LIKE ?), ?, ?, '', 'Ame no Tsuki', ?, ?, ?, '', '', '', NULL, '0', '0', '0')";
 
             if ($db->pQuery($sql, array('ssisss', $serie, $epNum, $date, $MQ, $HD, $FHD))) {
+                $episodeId = $db->getLastID();
                 echo 'Ajout de l\'épisode dans la base de donnée : ' . $file . '<br />' . PHP_EOL;
                 $num = $db->getVar("SELECT COUNT(news_id) FROM rss");
                 if ($num > 7) {
@@ -138,6 +150,7 @@ function addEpisodeDB($file, $link)
                     $db->pQuery("DELETE FROM rss WHERE news_id=?", array('i', $nb));
                 }
                 $db->query("INSERT INTO rss VALUES('','EPISODE','','',(SELECT MAX(id) FROM downloads))");
+
             } else
                 echo 'Ajout FAILED : ' . $file . ' <br />' . PHP_EOL;
         } else {
@@ -145,6 +158,7 @@ function addEpisodeDB($file, $link)
             $boundParams = array();
             $type = '';
             $links = array($episode->lien, $episode->lien2, $episode->lien3);
+            $episodeId = $episode->id;
             if (!empty($MQ) && !in_array($MQ, $links)) {
                 $boundParams[] = $MQ;
                 $type .= 's';
@@ -174,11 +188,11 @@ function addEpisodeDB($file, $link)
                 echo '<br />' . PHP_EOL;
             }
         }
-        return true;
+        return $episodeId;
     } catch (Exception $e) {
         echo 'ERROR : ' . $serie . ' n\'existe pas.<br />' . PHP_EOL;
         print_r($e);
-        return false;
+        return -1;
     }
 }
 

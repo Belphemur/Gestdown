@@ -37,13 +37,14 @@ $sql_login = 'c1mysql'; //le Login de votre base de donn�e, habituellement vot
 $sql_pass = 'b3myhtx9'; //Le passe d'acc�s � votre base de donn�es
 $sql_bdd = 'c1mysql'; //Le nom de votre base de donn�e
 $timeout=60;
-//$diskCache='C:/EasyPHP-5.3.3.1/www/gestdown/queries_cache';
+//$diskCache='/var/www/gestdown.info/tmp/';
 $diskCache='D:/Temp/cache';
 $tmpDir = $diskCache;
 
 //Episodes Config
 $episodeDir = '/home/ant/Episodes/';
-$moveScript = '/home/ant/moveEpisode.sh';
+$episodeHttpPath ='/Gestdown/series/';
+
 //Accepted Extension
 $epExt = '{mkv,avi,mp4}';
 
