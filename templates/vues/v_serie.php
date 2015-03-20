@@ -75,22 +75,50 @@
 </head>
 <body>
 <?php
-if ($nbScreen> 0) {
+if ($nbScreen > 0) {
     ?>
     <script type="text/plain" id="jsonepisodes">
-        <?php echo ($jsonEpisode) ?>
+        <?php echo($jsonEpisode) ?>
+
     </script>
     <script type="application/javascript">
+
+        function generateLink(id,quality) {
+            return '<a class="dlLink" href="dl-{0}-{1}.html">Lien</a>'.split('{0}').join(id).split("{1}").join(quality);
+        }
+        function renderLink(data,row,quality) {
+            if(data) {
+                return generateLink(row.id,quality);
+            }
+            return "";
+        }
         var $records = $('#jsonepisodes'),
             myRecords = JSON.parse($records.text());
         $(document).ready(function () {
-           $('#episodes').dataTable({
+            $('#episodes').dataTable({
                 data: myRecords,
-               "columns": [
-                   { "data": "nombre" },
-                   { "data": "titre" },
-                   { "data": "dl" }
-               ]
+                "columns": [
+                    {"data": "nombre"},
+                    {"data": "id", visible: false},
+                    {"data": "titre"},
+                    {"data": "dl"},
+                    {"data": "mq", render: function(data,type,row){
+                        return renderLink(data,row,'mq');
+                    }},
+                    {"data": "hd",render: function(data,type,row){
+                        return renderLink(data,row,'hd');
+                    }},
+                    {"data": "fhd",render: function(data,type,row){
+                        return renderLink(data,row,'fhd');
+                    }}
+                ],
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"
+                }, "createdRow": function (row, data) {
+                    $(row).attr("id", "ep-" + data.id);
+                },
+                "paging": false
+
             });
         });
     </script>
@@ -209,8 +237,12 @@ EOF;
             <table id="episodes" class="table table-bordered">
               <thead>
                 <th>Episode</th>
+                <th>id</th>
                 <th>Titre</th>
                 <th>Téléchargements</th>
+                <th>MQ</th>
+                <th>HD</th>
+                <th>FHD</th>
               </thead>
               <tbody>
               </tbody>
