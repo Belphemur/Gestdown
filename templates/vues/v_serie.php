@@ -41,8 +41,9 @@
             $totalDl+=$episode->dl;
             $screens .= sprintf($templateImg, $episode->screen) . PHP_EOL;
         }
+        $jsonEpisode = json_encode($serie->episodes);
     }
-    $jsonEpisode = json_encode($serie->episodes);
+
 
 ?>
 <!DOCTYPE html>
@@ -59,8 +60,14 @@
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.5/css/jquery.dataTables.css">
     <script type="text/javascript" src="static/js/jquery.js"></script>
     <script type="text/javascript" src="static/js/jquery.cycle2.min.js"></script>
-    <script type="text/javascript" src="static/js/main.js"></script>
     <script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.5/js/jquery.dataTables.min.js"></script>
+<?php
+if ($nbScreen > 0) {
+?>
+    <script type="text/javascript" language="javascript" src="static/js/episode-display.js"></script>
+<?php
+}
+?>
     <meta name="google-site-verification" content="u5EBaJ0m7q4fc-P3XpHv1qbduymAfNqcEuCJoMJ88kE"/>
     <meta name="msvalidate.01" content="2014CE1E3D3BAD4B6218115A64DBD92F"/>
     <style media="all" type="text/css">
@@ -79,49 +86,8 @@ if ($nbScreen > 0) {
     ?>
     <script type="text/plain" id="jsonepisodes">
         <?php echo($jsonEpisode) ?>
-
     </script>
-    <script type="application/javascript">
 
-        function generateLink(id,quality) {
-            return '<a class="dlLink" href="dl-{0}-{1}.html">Lien</a>'.split('{0}').join(id).split("{1}").join(quality);
-        }
-        function renderLink(data,row,quality) {
-            if(data) {
-                return generateLink(row.id,quality);
-            }
-            return "";
-        }
-        var $records = $('#jsonepisodes'),
-            myRecords = JSON.parse($records.text());
-        $(document).ready(function () {
-            $('#episodes').dataTable({
-                data: myRecords,
-                "columns": [
-                    {"data": "nombre"},
-                    {"data": "id", visible: false},
-                    {"data": "titre"},
-                    {"data": "dl"},
-                    {"data": "mq", render: function(data,type,row){
-                        return renderLink(data,row,'mq');
-                    }},
-                    {"data": "hd",render: function(data,type,row){
-                        return renderLink(data,row,'hd');
-                    }},
-                    {"data": "fhd",render: function(data,type,row){
-                        return renderLink(data,row,'fhd');
-                    }}
-                ],
-                "language": {
-                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"
-                }, "createdRow": function (row, data) {
-                    $(row).attr("id", "ep-" + data.id);
-                },
-                "paging": false
-
-            });
-        });
-    </script>
 <?php
 }
 ?>
