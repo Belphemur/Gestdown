@@ -7,7 +7,7 @@
  *@return string
  *@version 1.2.0;
  */
-class View extends Result
+class View extends stdClass
 {
     private $_path;    
     
@@ -19,7 +19,6 @@ class View extends Result
     public function __construct ($path)
     {
         $this->_path = $this->createPath($path);
-        Result::__construct();
     }
 
     /**
@@ -74,16 +73,7 @@ class View extends Result
         include ($content);
         
         return ob_get_clean();
-    } 
-	 /**
-     * Convertit un Result en View
-     *
-     * @param Result $res
-     */
-	public function convert(Result $res)
-	{
-		$this->set_vars($res->get_vars());
-	}
+    }
 
     /**
      * Remove all special characted
