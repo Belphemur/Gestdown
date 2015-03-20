@@ -104,7 +104,8 @@ function moveEpsiode($name, $file_name_with_full_path, $epiId)
     rename($file_name_with_full_path, $newName);
     chmod($newName, 0775);
     $dlPath = $episodeHttpPath . '/' . $serie . '/' . $name;
-    $sql = "INSERT INTO `DirectDownloads` (`id`, `episode`, `type`, `filepath`) VALUES (NULL, ?, ?, ?);";
+    $sql = "INSERT INTO `DirectDownloads` (`episode`, `type`, `filepath`) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE
+            filepath=VALUES(filepath)";
     if(!$db->pQuery($sql,array('iss',$epiId,$qual,$dlPath))) {
         echo 'Impossible de définir le DDL';
     }
