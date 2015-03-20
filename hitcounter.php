@@ -5,7 +5,7 @@ unset($db);
 $db = ezDB::getInstance();
 $db->connect($sql_serveur, $sql_login, $sql_pass, $sql_bdd);
 $db->enableDiskCache($diskCache,15);
-$jsUrl='http://js'.$urlPattern;
+
 // Lecture du paramètre id (méthode GET pour PHP>=4.1)
 if(isset ($_GET['id']))
     $id = intval($_GET["id"]);
@@ -118,7 +118,8 @@ if(isset($_GET['q']))
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Page de téléchargement de la Ame no Tsuki [AnT] (<?php echo $title," ",$result['dl_nom']," de ",$result['cat_nom'] ;?>)</title>
         <meta name="DESCRIPTION" content="<?php echo $title," ",$result['dl_nom']," de ",$result['cat_nom'] ;?> : <?php echo $result['description']; ?>" />
-        <script src="<?php echo $jsUrl; ?>jquery-1.6.2.min.js,deadEpisodeHit.js"></script>
+        <script src="js/jquery-1.6.2.min.js"></script>
+        <script type="application/javascript" src="js/deadEpisodeHit.js"></script>
     </head>
 
     <body>
