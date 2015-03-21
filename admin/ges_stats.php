@@ -86,7 +86,8 @@ $db->query("SET NAMES 'utf8'");
         }
     }
     $(document).ready(function(){
-        $("#jours").live('click',function(){
+        $("#jours").live('click',function(e){
+            e.preventDefault();
             if ($('#compare').is(':hidden'))
             {
                 $("#choice_date").text("Date de début :");
@@ -100,7 +101,8 @@ $db->query("SET NAMES 'utf8'");
             }
         });
 	
-        $("#date").live('click',function(){
+        $("#date").live('click',function(e){
+            e.preventDefault();
             if ($('#afficher').is(':hidden'))
             {
                 $("#choice_date").text("Choisissez la date :");
@@ -158,6 +160,7 @@ $db->query("SET NAMES 'utf8'");
     <div id="stats">
         <?php
         $stat = new Stats(time(), $db);
+        echo $stat->daily_display();
         echo $stat->total_display();
         ?>
     </div>

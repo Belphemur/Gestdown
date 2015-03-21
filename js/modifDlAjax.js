@@ -4,7 +4,11 @@ var ajaxOptions = {
     type: "POST",
     url: "modifier_dl.php"
 };
+var dataHtml = null;
 $(document).ready(function () {
+    if(!dataHtml) {
+        return;
+    }
     ajaxOptions.success = dataHtml;
     ajaxOptions.uploadProgress=function(event, position, total, percentComplete) {
         var percentVal = percentComplete + '%';
