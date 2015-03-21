@@ -61,12 +61,12 @@
 <?php
 if ($nbScreen > 0) {
 ?>
-    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.5/css/jquery.dataTables.css">
-    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/responsive/1.0.4/css/dataTables.responsive.css">
+    <link rel="stylesheet" type="text/css" href="static/css/dataTables.css">
+    <link rel="stylesheet" type="text/css" href="static/css/dataTables.responsive.css">
     <script type="text/javascript" src="static/js/jquery.js"></script>
     <script type="text/javascript" src="static/js/jquery.cycle2.min.js"></script>
-    <script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.5/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" language="javascript" src="//cdn.datatables.net/responsive/1.0.4/js/dataTables.responsive.js"></script>
+    <script type="text/javascript" language="javascript" src="static/js/datatables.1.10.5.min.js"></script>
+    <script type="text/javascript" language="javascript" src="static/js/dataTables.responsive.js"></script>
     <script type="text/javascript" language="javascript" src="static/js/episode-display.js"></script>
 <?php
 }
