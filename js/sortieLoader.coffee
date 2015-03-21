@@ -1,4 +1,4 @@
-url = 'http://www.gestdown.info/api/sorties.php'
+url = 'https://www.gestdown.info/api/sorties.php'
 nb = 5
 openNewTab = (tabUrl) ->
   win = window.open(tabUrl, '_blank');
