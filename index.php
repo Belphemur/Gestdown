@@ -15,12 +15,15 @@ if (isset($_GET['ext'])) {
             $ep = new Episode($id, $db);
             $vue->episodeId = $id;
             $vue->serie = new Serie($ep->getCatId(), $db);
+            $titre .= $vue->serie->getNom();
+            $titre .= ' > '.$ep->getNom();
         } else if (isset($_GET['serie'])) {
             $vue->serie = new Serie($id, $db);
+            $titre .= $vue->serie->getNom();
         } else {
             throw new Error("problem");
         }
-        $titre .= $vue->serie->getNom();
+
     } catch (Error $e) {
         $titre = "Gestdown : Not Found";
         $viewFile = "v_404.php";

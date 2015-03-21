@@ -53,7 +53,7 @@ class Episode implements Module
     }
     function getNom()
     {
-        return $this->result['nom']." de ". $this->result['cat'];
+        return $this->result['nom'];
     }
     function getCatId()
     {

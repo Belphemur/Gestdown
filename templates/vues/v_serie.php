@@ -78,7 +78,17 @@ function generateTVEpisode(stdClass $episode, $website) {
     <link rel="stylesheet" type="text/css" href="static/css/reset.css">
     <link rel="stylesheet" type="text/css" href="static/css/main.css">
     <meta property="og:title" content="<?php echo $this->titre; ?>" />
-    <meta property="og:image" content="<?php echo 'https:',$serie->img ?>" />
+    <?php
+    if(isset($this->episodeId)) {
+        ?>
+        <meta property="og:image" content="<?php echo 'https:', $currentEp->screen ?>"/>
+    <?php
+    } else {
+        ?>
+        <meta property="og:image" content="<?php echo 'https:', $serie->img ?>"/>
+    <?php
+    }
+    ?>
     <meta property="og:description" content="<?php echo htmlentities($serie->synopsis) ?>" />
 <?php
 if ($nbScreen > 0) {
