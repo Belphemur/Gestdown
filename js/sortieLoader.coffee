@@ -17,7 +17,7 @@ $ ->
       screen = elem.screen
       epInfo = serie + '<br />' + episode
       title = serie + ' - ' + episode
-      href = "http://www.gestdown.info/ep-" + elem.id + ".html"
+      href = "https://www.gestdown.info/ep-" + elem.id + ".html"
       screenPart = screen.split "?"
       screenPart = screenPart[0].split('/').pop()
       screenPart = screenPart.split "."

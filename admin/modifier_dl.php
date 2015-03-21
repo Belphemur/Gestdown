@@ -33,7 +33,8 @@ function sendToImgur($image, $name)
     );
     $basic = $client->api('image')->upload($imageData);
     unlink($image);
-    return $basic->getData()['link'];
+    $link = explode('//',$basic->getData()['link']);
+    return '//'.$link[1];
 }
 
 function resizeAndImgur($uploadfile, $screenPath, $name)
