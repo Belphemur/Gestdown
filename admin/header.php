@@ -13,9 +13,15 @@ $_SESSION['pseudo']=SessionManager::getInstance()->userName;
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
         <link rel="stylesheet" type="text/css" href="images/style.css" />
         <LINK href="images/live.css" rel="stylesheet" type="text/css">
-            <script src="http://www.gestdown.info/js/verification_formulaire.js,jquery-1.6.2.min.js,jquery-ui-1.8.16.custom.min.js,controller.js,formulaire_admin.js,jquery.form.js,modifDlAjax.js"></script>
-            <link rel="stylesheet" href="http://www.gestdown.info/css/jquery.datepick.css" type="text/css" media="screen" charset="utf-8" />
-            <script type="text/javascript" src="http://js.gestdown.info/jquery.datepick.pack.js"></script>
+        <script type="application/javascript" src="../js/jquery-1.6.2.min.js"></script>
+        <script src="../js/verification_formulaire.js" type="application/javascript"></script>
+        <script type="application/javascript" src="../js/jquery-ui-1.8.16.custom.min.js"></script>
+        <script type="text/javascript" src="../js/jquery.datepick.pack.js"></script>
+        <script type="application/javascript" src="../js/controller.js"></script>
+        <script type="application/javascript" src="../js/formulaire_admin.js"></script>
+        <script type="application/javascript" src="../js/jquery.form.js"></script>
+        <script type="application/javascript" src="../js/modifDlAjax.js"></script>
+        <link rel="stylesheet" href="../css/jquery.datepick.css" type="text/css" media="screen" charset="utf-8" />
     </head>
 
     <body>
