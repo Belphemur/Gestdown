@@ -36,7 +36,7 @@ class Serie implements Module
 
     function isValid()
     {
-        $sql = "SELECT c.finie, c.licencie, c.stopped, c.nom cat_nom,c.image img, c.description synopsis, d.nom ep, d.nbhits,  d.id, d.description, d.screen, d.lien mq, d.lien2 hd, d.lien3 fhd,
+        $sql = "SELECT c.finie, c.licencie, c.stopped, c.nom cat_nom,c.image img, c.description synopsis, d.nom ep, d.nbhits, d.date, d.id, d.description, d.screen, d.lien mq, d.lien2 hd, d.lien3 fhd,
         i.annee, i.auteur, i.episode, i.genre, i.studio
 		FROM categorie c
 		LEFT JOIN downloads d
@@ -156,6 +156,7 @@ class Serie implements Module
                 $ep->hd = !empty($episode->hd);
                 $ep->fhd = !empty($episode->fhd);
                 $ep->dl = $episode->nbhits;
+                $ep->added = $episode->date;
                 $episodes[] = $ep;
             }
         }

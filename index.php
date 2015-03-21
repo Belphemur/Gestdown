@@ -31,8 +31,8 @@ if (isset($_GET['ext'])) {
     $vue->series = $series;
     $viewFile = "v_index3.php";
 }
-$vue->header_js = $header_js;
 $vue->titre = $titre;
 $vue->meta_desc = $meta_desc;
+$vue->urlWebsite = $url_site;
 echo $vue->render($viewFile);
 

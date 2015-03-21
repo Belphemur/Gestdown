@@ -1,4 +1,15 @@
 <?php
+function generateTVEpisode(stdClass $episode, $website) {
+    $tvEp = new stdClass();
+    $tvEp->{'@context'} = 'http://schema.org';
+    $tvEp->{'@type'} = 'TVEpisode';
+    $tvEp->episodeNumber= $episode->nombre;
+    $tvEp->url = $website . 'ep-'.$episode->id.'.html';
+    $tvEp->image = 'https:' . $episode->screen;
+    $tvEp->datePublished = date('c', $episode->added);
+    $tvEp->name = $episode->titre;
+    return $tvEp;
+}
     $serie = $this->serie->execute();
     $previousUrl = null;
     $nextUrl = null;
@@ -34,11 +45,19 @@
     $templateImg = '<img src="%s" />';
     $nbScreen = count($serie->episodes);
     $totalDl =0;
+    $TVEpisodes = array();
+
+    $currentEp = null;
     if($nbScreen > 0) {
-        $firstScreen = sprintf($templateImg, $serie->episodes[0]->screen);
-        $totalDl += $serie->episodes[0]->dl;
-        for ($i = 1; $i < $nbScreen; $i++) {
+        for ($i = 0; $i < $nbScreen; $i++) {
+            if($i == 0){
+                $firstScreen = sprintf($templateImg, $serie->episodes[0]->screen);
+            }
             $episode = $serie->episodes[$i];
+            if(isset($this->episodeId) && $episode->id == $this->episodeId) {
+                $currentEp = $episode;
+            }
+            $TVEpisodes[] = generateTVEpisode($episode, $this->urlWebsite);
             $totalDl+=$episode->dl;
             $screens .= sprintf($templateImg, $episode->screen) . PHP_EOL;
         }
@@ -99,19 +118,22 @@ if ($nbScreen > 0) {
 
 if(isset($this->episodeId)) {
 ?>
-    <script type="text/plain" id="episodeId">
-        <?php echo $this->episodeId ?>
+    <script type="text/plain" id="episodeId"><?php echo $this->episodeId ?></script>
+    <script type="application/ld+json">
+<?php
+    echo json_encode(generateTVEpisode($currentEp, $this->urlWebsite));
+?>
     </script>
 <?php
-}
+} else {
 ?>
-<script type="application/ld+json">
+    <script type="application/ld+json">
 {
   "@context": "http://schema.org",
   "@type": "TVSeries",
   "author": {
     "@type": "Person",
-    "name": <?php echo json_encode(str_replace(array('[',']'),'',$info->auteur)) ?>
+    "name": <?php echo json_encode(str_replace(array('[', ']'), '', $info->auteur)) ?>
 
   },
   "name": <?php echo json_encode($serie->nom) ?>,
@@ -119,14 +141,19 @@ if(isset($this->episodeId)) {
   "numberOfEpisodes": <?php echo $nbScreen ?>,
   "associatedMedia" : {
     "@type": "ImageObject",
-    "contentUrl": "<?php echo 'https:',$serie->img ?>"
+    "contentUrl": "<?php echo 'https:', $serie->img ?>"
   },
   "productionCompany" : {
     "@type": "Organization",
-    "name" : <?php echo json_encode(str_replace(array('[',']'),'',$info->studio)) ?>
-  }
+    "name" : <?php echo json_encode(str_replace(array('[', ']'), '', $info->studio)) ?>
+  },
+  "episodes" : <?php echo json_encode($TVEpisodes) ?>
 }
-</script>
+
+    </script>
+<?php
+}
+?>
 <header>
     <div class="logo">
         <a href="index.php"><img src="static/img/logo.png" title="Gestdown" alt="Gestdown"/></a>
