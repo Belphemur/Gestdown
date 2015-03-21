@@ -58,7 +58,7 @@ class Stats {
         $this->exist();
     }
 
-    function compare($end_d, $daily=false, $path="http://images.gestdown.info/graph/") {
+    function compare($end_d, $daily=false, $path="//www.gestdown.info/images/graph/") {
         $first_d = $this->date_;
         if ($daily)
             $f_stats = $this->Dstats;
@@ -111,7 +111,7 @@ class Stats {
         }
     }
 
-    function daily_display($img="http://images.gestdown.info/graph/", $graph_title=NULL) {
+    function daily_display($img="//www.gestdown.info/images/graph/", $graph_title=NULL) {
         if ($this->bug)
             return "Aucune stats";
         $s_dls = array();
@@ -146,7 +146,7 @@ class Stats {
         return $output;
     }
 
-    function total_display($img="http://images.gestdown.info/graph/", $graph_title=NULL) {
+    function total_display($img="//www.gestdown.info/images/graph/", $graph_title=NULL) {
         if ($this->bug)
             return "Aucune stats";
         $s_dls = array();
