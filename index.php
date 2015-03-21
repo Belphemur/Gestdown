@@ -2,7 +2,7 @@
 require_once("admin/conf.php");
 
 $vue = new View("./templates/vues/");
-$titre = "Ame no Tsuki [AnT] (Gestdown) : ";
+$titre = "Ame no Tsuki [AnT] (Gestdown) > ";
 $meta_desc = "Site centralisant les épisode de la Ame No Tsuki qui est une team de fansub. Le site contient tous les liens de la team, les épisodes, un forum et plein d'autre informations. Notre boulot consiste à vous faire découvrir la japanimation, nous traduisons et sous-titrons plusieurs séries d'animations japonaises.";
 
 if (isset($_GET['id']))

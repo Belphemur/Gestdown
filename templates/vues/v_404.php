@@ -6,7 +6,7 @@ header("HTTP/1.1 404 Not Found");
 <head>
     <title><?php echo $this->titre; ?></title>
     <meta charset="utf-8">
-    <meta name="author" content="pixelhint.com">
+    <meta name="author" content="www.ame-no-tsuki.fr">
     <meta name="description" content="Magnetic is a stunning responsive HTML5/CSS3 photography/portfolio website  template"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="static/css/reset.css">

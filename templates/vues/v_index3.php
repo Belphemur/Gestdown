@@ -3,7 +3,7 @@
 <head>
     <title><?php echo $this->titre; ?></title>
     <meta charset="utf-8">
-    <meta name="author" content="pixelhint.com">
+    <meta name="author" content="www.ame-no-tsuki.fr">
     <meta name="DESCRIPTION" content="<?php echo $this->meta_desc; ?>"/>
     <meta name="KEYWORDS" content="ame no tsuki, mangas, anime, japon, fansub, téléchargement, projets"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0"/>
@@ -15,6 +15,8 @@
     <script type="text/javascript" src="static/js/imagesloaded.pkgd.min.js"></script>
     <script type="text/javascript" src="static/js/lazysizes.min.js"></script>
     <script type="text/javascript" src="static/js/series-display.js"></script>
+    <meta property="og:title" content="<?php echo $this->titre; ?>" />
+    <meta property="og:description" content="<?php echo $this->meta_desc; ?>" />
     <meta name="google-site-verification" content="u5EBaJ0m7q4fc-P3XpHv1qbduymAfNqcEuCJoMJ88kE"/>
     <meta name="msvalidate.01" content="2014CE1E3D3BAD4B6218115A64DBD92F"/>
 </head>

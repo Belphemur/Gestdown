@@ -52,12 +52,15 @@
 <head>
     <title><?php echo $this->titre; ?></title>
     <meta charset="utf-8">
-    <meta name="author" content="pixelhint.com">
+    <meta name="author" content="www.ame-no-tsuki.fr">
     <meta name="DESCRIPTION" content="<?php echo $this->meta_desc; ?>"/>
     <meta name="KEYWORDS" content="ame no tsuki, mangas, anime, japon, fansub, téléchargement, projets"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0"/>
     <link rel="stylesheet" type="text/css" href="static/css/reset.css">
     <link rel="stylesheet" type="text/css" href="static/css/main.css">
+    <meta property="og:title" content="<?php echo $this->titre; ?>" />
+    <meta property="og:image" content="<?php echo 'https:',$serie->img ?>" />
+    <meta property="og:description" content="<?php echo htmlentities($serie->synopsis) ?>" />
 <?php
 if ($nbScreen > 0) {
 ?>
@@ -102,6 +105,28 @@ if(isset($this->episodeId)) {
 <?php
 }
 ?>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "TVSeries",
+  "author": {
+    "@type": "Person",
+    "name": <?php echo json_encode(str_replace(array('[',']'),'',$info->auteur)) ?>
+
+  },
+  "name": <?php echo json_encode($serie->nom) ?>,
+  "description": <?php echo json_encode($serie->synopsis) ?>,
+  "numberOfEpisodes": <?php echo $nbScreen ?>,
+  "associatedMedia" : {
+    "@type": "ImageObject",
+    "contentUrl": "<?php echo 'https:',$serie->img ?>"
+  },
+  "productionCompany" : {
+    "@type": "Organization",
+    "name" : <?php echo json_encode(str_replace(array('[',']'),'',$info->studio)) ?>
+  }
+}
+</script>
 <header>
     <div class="logo">
         <a href="index.php"><img src="static/img/logo.png" title="Gestdown" alt="Gestdown"/></a>
