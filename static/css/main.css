@@ -661,6 +661,6 @@ h5, h6          { font-weight: bolder }
 #episodes a.ddl {
     display:block;
     margin-bottom: 10px;
-    font-weight: bold;
-    color: green;
+    font-weight: bolder;
+    font-size: 110%;
 }
