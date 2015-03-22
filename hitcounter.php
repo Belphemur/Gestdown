@@ -118,7 +118,7 @@ if(isset($_GET['q']))
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Page de téléchargement de la Ame no Tsuki [AnT] (<?php echo $title," ",$result['dl_nom']," de ",$result['cat_nom'] ;?>)</title>
         <meta name="DESCRIPTION" content="<?php echo $title," ",$result['dl_nom']," de ",$result['cat_nom'] ;?> : <?php echo $result['description']; ?>" />
-        <script src="js/jquery-1.6.2.min.js"></script>
+        <script src="static/js/jquery.js"></script>
         <script type="application/javascript" src="js/deadEpisodeHit.js"></script>
     </head>
 
@@ -134,19 +134,18 @@ if(isset($_GET['q']))
         </div>
         <script type="text/javascript">
 
-            var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', 'UA-9163128-1']);
-            _gaq.push(['_setDomainName', '.gestdown.info']);
-            _gaq.push(['_trackPageview']);
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-            (function() {
-                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-            })();
+            ga('create', 'UA-9163128-1', 'auto');
+            ga('send', 'pageview');
+            setTimeout(function(){
+                location.assign("<?php echo $enreg ?>");
+            },1000)
 
         </script>
-        <iframe src="<?php echo $enreg; ?>" width="100%" height="1200" scrolling="no">
     </body>
 </html>
         <?php

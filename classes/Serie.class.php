@@ -37,7 +37,10 @@ class Serie implements Module
     function isValid()
     {
         $sql = "SELECT c.finie, c.licencie, c.stopped, c.nom cat_nom,c.image img, c.description synopsis, d.nom ep, d.nbhits, d.date, d.id, d.description, d.screen, d.lien mq, d.lien2 hd, d.lien3 fhd,
-        i.annee, i.auteur, i.episode, i.genre, i.studio
+        i.annee, i.auteur, i.episode, i.genre, i.studio,
+        (SELECT filepath FROM DirectDownloads WHERE episode=d.id AND type ='MQ') as DDL_MQ,
+        (SELECT filepath FROM DirectDownloads WHERE episode=d.id AND type ='HD') as DDL_HD,
+        (SELECT filepath FROM DirectDownloads WHERE episode=d.id AND type ='FHD') as DDL_FHD
 		FROM categorie c
 		LEFT JOIN downloads d
 		ON c.id=d.categorie
@@ -155,6 +158,9 @@ class Serie implements Module
                 $ep->mq = !empty($episode->mq);
                 $ep->hd = !empty($episode->hd);
                 $ep->fhd = !empty($episode->fhd);
+                $ep->DDL_mq = !empty($episode->DDL_MQ);
+                $ep->DDL_hd = !empty($episode->DDL_HD);
+                $ep->DDL_fhd = !empty($episode->DDL_FHD);
                 $ep->dl = $episode->nbhits;
                 $ep->added = $episode->date;
                 $episodes[] = $ep;

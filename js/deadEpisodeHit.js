@@ -1,5 +1,5 @@
 $(document).ready(function(){
-		$("a.reporter_lien").live('click',function(){
+		$("a.reporter_lien").click(function(){
 			if ($('#reporter').is(':hidden'))
 			{
 				$('#reporter').slideDown('slow');
@@ -10,22 +10,24 @@ $(document).ready(function(){
 			}
 		});
 		
-	$("#Dead").click(function(){
+	$("#Dead").click(function(e){
 		 var url = $("#formDead").serialize();
+		e.preventDefault();
 		// Utilisation d'Ajax / jQuery pour l'envoie
 		 $.ajax({
 			   type: "POST",
 			   url: "suggestion.php",
 			   data: url,
+			   dataType: "text",
 			   success: function html(data){
 					// Si l'ajout est réussi, afficher un message de réussite
-				$("#result").html(data); 
-				$("#result").show("slow");
-				setTimeout("$(\"#result\").slideUp(\"slow\")",3000);
+				$("#reporter").text(data);
+				setTimeout(function() {
+					$('#reporter').slideUp('slow');
+				},3000);
 			   }
 			 });		
 		// Nous retournons "false" au navigateur afin que la page ne soit pas actualisé
-		return false;
 	
 	});
 

@@ -1,45 +1,37 @@
 <?php
 require('./admin/conf.php');
 SessionManager::getInstance('GestDownSession',false);
-header('Content-Type: text/html; charset=uf8');
-echo'		<script language="Javascript">
-			function Fermer()
-			{
-				opener=self;
-				self.close();
-			}
-			</script>';
+header('Content-Type: text/html; charset=utf8');
 $testcaptcha = new MathCaptcha();
-$msg_erreur = "Erreur. Les champs suivants doivent être obligatoirement remplis :<br/><br/>";
-$msg_ok = "Résumé envoyé, un Administrateurs vérifiera rapidement votre suggestion.<br />";
+$msg_erreur = "Erreur. Les champs suivants doivent Ãªtre obligatoirement remplis :<br/><br/>";
+$msg_ok = "RÃ©sumÃ© envoyÃ©, un Administrateurs vÃ©rifiera rapidement votre suggestion.<br />";
 $message = $msg_erreur;
 if(!isset($_POST['mort']))
 {
     if (empty($_POST['resume']))
-        $message .= "Resumé<br/>";
+        $message .= "Resumé".PHP_EOL;
     else if(strlen($_POST['resume']) > 1100)
-        $message .="Votre résumé dépasse la limite de 1100 caractères";
+        $message .="1100 charactères max".PHP_EOL;
     if (empty($_POST['auteur']))
-        $message .= "Auteur<br/>";
+        $message .= "Auteur".PHP_EOL;
     if(!empty($_POST['screen']))
         if(!filter_var($_POST['screen'], FILTER_VALIDATE_URL, FILTER_FLAG_SCHEME_REQUIRED))
-            $message .= "Lien du screen invalide<br/>";
-    if(!empty($_POST['math_captcha']))
+            $message .= "Lien du screen invalide".PHP_EOL;
+    if(isset($_POST['math_captcha']) && is_numeric($_POST['math_captcha']))
     {
-        $answer = $_POST['math_captcha'];
+        $answer = intval($_POST['math_captcha']);
         if(!$testcaptcha->checkAnswer($answer,'sug_'.$id))
-            $message="Réponse au calcul erronée <br/>";
+            $message="Réponse au calcul erronée".PHP_EOL;
     }
     else
-        $message.="Calcul mathématique <br/>";
+        $message.="Calcul mathématique".PHP_EOL;
 
     $requete="SELECT id FROM `descriptions` WHERE `auteur`='$auteur' AND `download`='$id'";
     if($db->query($requete))
-        $message="Vous avez déjà proposé un résumé pour cet épisode, veuillez patienter le temps qu'un administrateur le lise";
+        $message="Vous avez déjà  proposé un résumé pour cet épisode, veuillez patienter le temps qu'un administrateur le lise";
 
     if ($message!=$msg_erreur)
     {
-        $message.='<br /><br /><a href="#" onClick="Fermer();">Fermer</a>';
         die($message);
     }
     else
@@ -51,7 +43,6 @@ if(!isset($_POST['mort']))
         $sql = "INSERT INTO descriptions VALUES ('', '$id', '$resume', '$auteur','$screen',0)";
         $res = $db->query($sql);
         echo $msg_ok;
-        echo '<br /><br /><a href="#" onClick="Fermer();">Fermer</a>';
 
 
     }
@@ -65,15 +56,15 @@ if(!isset($_POST['mort']))
 else
 {
     if (empty($_POST['explication']))
-        $message .= "Explications<br/>";
+        $message .= "Explications";
     if(!empty($_POST['math_captcha']))
     {
         $answer = $_POST['math_captcha'];
         if(!$testcaptcha->checkAnswer($answer,$id))
-            $message="Réponse au calcul erronée <br/>";
+            $message="Réponse au calcul erronée".PHP_EOL;
     }
     else
-        $message.="Calcul mathématique <br/>";
+        $message.="Calcul mathématique".PHP_EOL;
 
     if ($message!=$msg_erreur)
     {
@@ -90,7 +81,6 @@ else
     $db->query($requete);
     $db->query("INSERT INTO descriptions VALUES ('', '$id', '$explication', 'LIEN_MORT','',1)");
     echo 'Merci de nous avoir signalé ce lien mort';
-    echo '<br /><br /><a href="#" onClick="Fermer();">Fermer</a>';
 
     if(isset($_SESSION['solution_'.$id]))
     {
