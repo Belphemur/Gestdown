@@ -301,7 +301,7 @@ EOF;
 <?php
 if($nbScreen > 0) {
 ?>
-    <script src="//api.peer5.com/peer5.js?id=z142i5n5qypq4cxr" type="application/javascript"></script>
+    <script src="//api.peer5.com/peer5.js?id=wsyczbjqfdd0bgdy11j9" type="application/javascript"></script>
 <?php
 }
 ?>

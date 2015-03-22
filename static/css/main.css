@@ -664,3 +664,7 @@ h5, h6          { font-weight: bolder }
     font-weight: bolder;
     font-size: 110%;
 }
+
+table.dataTable tbody td {
+    text-align: center;
+}
