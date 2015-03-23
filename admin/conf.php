@@ -7,9 +7,8 @@ error_reporting(E_ALL | E_NOTICE);
 //Votre site\\
 $nom_site = 'Ame no Tsuki'; //Nom de votre site
 $email_admin = 'balor@gestdown.info'; //Votre email
-$url_site = 'http://www.gestdown.info/'; //Adresse de votre site
+$url_site = 'https://www.gestdown.info/'; //Adresse de votre site
 $page_dl ='index'; //nom de la premi�re page
-$urlPattern='';
 $joomla=false;
 
 //Conf pour le FTP\\
@@ -48,6 +47,8 @@ $episodeHttpPath ='/Gestdown/series/';
 
 //Accepted Extension
 $epExt = '{mkv,avi,mp4}';
+$epExtArray = array('mp4','mkv','avi');
+
 
 ///JHEBERG
 $jheberg['user'] = 'anttsuki';

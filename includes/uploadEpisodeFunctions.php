@@ -19,6 +19,7 @@ function getFileList($directory)
 
 function getDirectories($root) {
     $result = array();
+    $root = rtrim($root, '/');
 
     $cdir = scandir($root);
     foreach ($cdir as $key => $value)
@@ -72,7 +73,7 @@ function plotTree($arr, $indent=0, $mother_run=true){
 
 function getDirectoryListOld($directory)
 {
-    global $epExt;
+    global $epExtArray;
     // create an array to hold directory list
     $results = array();
     // create a handler for the directory
@@ -81,8 +82,8 @@ function getDirectoryListOld($directory)
     while ($file = readdir($handler)) {
         $ext = pathinfo($file, PATHINFO_EXTENSION);
         // if file isn't this directory or its parent, add it to the results
-        if ($file != "." && $file != ".." && in_array($ext, $epExt)) {
-            $results[] = $file;
+        if ($file != "." && $file != ".." && in_array($ext, $epExtArray)) {
+            $results[] = $directory.DIRECTORY_SEPARATOR.$file;
         }
     }
     // tidy up: close the handler

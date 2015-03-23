@@ -14,7 +14,7 @@ include('templates/linksUp.html');
 
 if(isset($_POST['folders'])) {
  foreach ($_POST['folders'] as $folder) {
-     foreach(getFileList($folder) as $file) {
+     foreach(getDirectoryListOld($folder) as $file) {
          sendFileToJheberg($file);
      }
  }
