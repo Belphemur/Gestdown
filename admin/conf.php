@@ -42,7 +42,8 @@ $diskCache='D:/Temp/cache';
 $tmpDir = $diskCache;
 
 //Episodes Config
-$episodeDir = '/home/ant/Episodes/';
+$episodeDir ="D:/Temp/";
+//$episodeDir = '/home/ant/Episodes/';
 $episodeHttpPath ='/Gestdown/series/';
 
 //Accepted Extension
