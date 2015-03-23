@@ -44,10 +44,10 @@ function renderLink(data, row, quality) {
     if (data) {
         if(row['DDL_'+quality]) {
             var liens = generateLink(row.id, quality, 'ddl', 'DDL AnT');
-            liens += generateLink(row.id, quality, 'dl', 'Lien');
+            liens += generateLink(row.id, quality, 'dl', 'Jheberg');
             return liens;
         }
-        return generateLink(row.id, quality, 'dl', 'Lien');
+        return generateLink(row.id, quality, 'dl', 'Jheberg');
     }
     return "";
 }
