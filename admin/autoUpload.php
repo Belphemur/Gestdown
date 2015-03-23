@@ -1,5 +1,4 @@
 <?php
-include_once('../includes/host.php');
 set_time_limit(0); // Removes the time limit, so it can upload as many as possible
 ini_alter("memory_limit", "1024M"); // Set memory limit, in case it runs out when processing large files
 $url = '../rapid/files/myuploads.txt';
@@ -23,7 +22,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'upload') {
         echo "Aucun fichier sélectionné";
 }
 $files = "";
-foreach (getDirectoryList($episodeDir) as $key) {
+foreach (getFileList($episodeDir) as $key) {
     $name = pathinfo($key, PATHINFO_BASENAME);
     $files .= ' <tr>
     <td><input type="checkbox" name="files[]" value="' . $key . '" /></td>
@@ -49,7 +48,7 @@ foreach (getDirectoryList($episodeDir) as $key) {
 
 
 <?php
-exec("cd /var/www/gestdown.info/web/ant/Episodes/; chmod 0777 *.avi; chmod 0777 *.mp4; chmod 0777 *.mkv");
+exec("cd /home/ant/Episodes/; chmod 0777 *.avi; chmod 0777 *.mp4; chmod 0777 *.mkv");
 ?>
 <div id="content">
 

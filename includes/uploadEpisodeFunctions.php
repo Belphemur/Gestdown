@@ -6,10 +6,11 @@
  * Time: 09:03
  */
 require_once ('../admin/conf.php');
-function getDirectoryList($directory)
+include_once('host.php');
+function getFileList($directory)
 {
     global $epExt;
-    $files = glob($directory . '*.' . $epExt, GLOB_BRACE);
+    $files = glob($directory . DIRECTORY_SEPARATOR . '*.' . $epExt, GLOB_BRACE);
     usort($files, function ($a, $b) {
         return filemtime($a) < filemtime($b);
     });
@@ -42,7 +43,7 @@ function getDirectories($root) {
 function plotTree($arr, $indent=0, $mother_run=true){
     if ($mother_run) {
         // the beginning of plotTree. We're at rootlevel
-        //echo "<ul>";
+       echo '<div class="tree">';
     }
 
     foreach ($arr as $k=>$v){
@@ -52,37 +53,19 @@ function plotTree($arr, $indent=0, $mother_run=true){
         $show_val = (is_array($v) && !empty($v) ? $v["path"] : $v);
         // show the indents
         echo str_repeat("  ", $indent);
-        if ($indent == 0) {
-            // this is a root node. no parents
-            echo "<ul><li>";
-        } elseif (is_array($v->next) && !empty($v->next)){
-            // this is a normal node. parents and children
-            echo "<ul><li>";
-        } else {
-            // this is a leaf node. no children
-            echo "<li>";
-        }
+        echo "<ul><li>";
 
         // show the actual node
-        echo $k . " (" . $show_val->path. ")</li>";
+        echo '<input type="checkbox" name="folders[]" value="' . $show_val->path . '" />',$k, '</li>';
         if (is_array($v->next)) {
             // this is what makes it recursive, rerun for childs
             plotTree($v->next, ($indent+1), false);
         }
-        if ($indent == 0) {
-            // this is a root node. no parents
-            echo "</ul>".PHP_EOL;
-        } elseif (is_array($v->next) && !empty($v->next)){
-            // this is a normal node. parents and children
-            echo "</ul>".PHP_EOL;
-        } else {
-            // this is a leaf node. no children
-            //echo "</li>".PHP_EOL;
-        }
+        echo "</ul>".PHP_EOL;
     }
 
     if ($mother_run) {
-        //echo "</ul>";
+        echo "</div>";
     }
 }
 
@@ -165,6 +148,7 @@ function moveEpsiode($name, $file_name_with_full_path, $epiId)
     global $episodeDir, $episodeHttpPath, $db;
     $serie = '';
     list($num, $serie, $qual) = linkInformations($name, true);
+    $name = basename($name);
     $fullPath = $episodeDir . '/' . $serie;
     mkdir($fullPath, 0775, true);
     $newName = $fullPath . '/' . $name;

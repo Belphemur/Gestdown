@@ -42,7 +42,7 @@ $diskCache='D:/Temp/cache';
 $tmpDir = $diskCache;
 
 //Episodes Config
-$episodeDir ="D:/Temp/";
+$episodeDir ="D:\\Temp\\";
 //$episodeDir = '/home/ant/Episodes/';
 $episodeHttpPath ='/Gestdown/series/';
 
