@@ -23,6 +23,16 @@ if (!is_numeric($id)) {
     return;
 }
 
+if($_POST['downloaded']) {
+    $sql = 'UPDATE DirectDownloads SET  downloads=downloads+1 WHERE episode=? AND type = ?';
+    if($db->pQuery($sql, array('is', $id, $type))) {
+        header("HTTP/1.1 204 No Response");
+    } else {
+        header("HTTP/1.1 404 Not Found");
+    }
+    die();
+}
+
 $sql = 'SELECT filepath FROM DirectDownloads WHERE episode=? AND type = ?';
 $db->pQuery($sql, array('is', $id, $type));
 $link = $db->getVar();
