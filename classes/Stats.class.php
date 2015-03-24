@@ -2,166 +2,81 @@
 
 require_once("CAsBarDiagram.php");
 
-class Stats {
+class Stats
+{
 
-    private $date_, $db, $Dstats, $Tstats, $results, $eps, $bug = false;
+    private $_date, $db, $dailyStats, $totalStats, $bug = false;
 
-    function __construct($date, $db) {
-        if (is_numeric($date))
-            $this->date_ = date("Y-m-d", $date);
-        else
-            $this->date_ = date("Y-m-d", strtotime($date));
+    function __construct($date, ezDB $db)
+    {
         $this->db = $db;
-        $this->stats = array();
-        try
-        {
-            try
-            {
-                $this->exist();
-            } catch (Exception $e)
-            {
+        $this->dailyStats = array();
+        $this->totalStats = array();
+        try {
+            try {
+                $this->setDate($date);
+            } catch (Exception $e) {
 
-                $this->setDate(strtotime($this->date_) - (24 * 3600));
+                $this->setDate(strtotime($this->_date) - (24 * 3600));
             }
-        } catch (Exception $e)
-        {
+        } catch (Exception $e) {
 
             $this->bug = true;
         }
     }
 
-    function __destruct() {
+    function __destruct()
+    {
         unset($this->db);
     }
 
-    private function exist() {
-        $sql = "SELECT daily,dls total,ep FROM stats WHERE date='{$this->date_}'";
-        if (!$this->db->query($sql))
-        {
+    private function exist()
+    {
+        $sql = 'SELECT ds.DirectDownloads, ds.Downloads,ds.Episodes, c.nom AS nom
+                FROM DownloadStats ds
+                JOIN categorie c
+                ON c.id = ds.Serie
+                WHERE ds.Type=? AND ds.Date=?
+                ORDER BY nom ASC';
+        if (!$this->db->pQuery($sql, array('ss', 'Total', $this->_date))) {
             throw new Exception('Aucune statistique trouvée à cette date', 1);
-            return false;
-        } else
-        {
-            $this->results = $this->db->getRow(false,false);
-            $this->Dstats = unserialize($this->results['daily']);
-            $this->Tstats = unserialize($this->results['total']);
-            $this->eps = unserialize($this->results['ep']);
-            return true;
+        } else {
+            $total = $this->db->getResults();
+            $this->db->pQuery($sql, array('ss', 'Daily', $this->_date));
+            $daily = $this->db->getResults();
+            foreach ($total as $id => $value) {
+                $this->totalStats[$value->nom] = $value;
+                $this->dailyStats[$value->nom] = $daily[$id];
+            }
         }
     }
 
-    function setDate($new_date) {
+    function setDate($new_date)
+    {
         if (is_numeric($new_date))
-            $this->date_ = date("Y-m-d", $new_date);
+            $this->_date = date("Y-m-d", $new_date);
         else
-            $this->date_ = date("Y-m-d", strtotime($new_date));
+            $this->_date = date("Y-m-d", strtotime($new_date));
         $this->exist();
     }
 
-    function compare($end_d, $daily=false, $path="//www.gestdown.info/images/graph/") {
-        $first_d = $this->date_;
-        if ($daily)
-            $f_stats = $this->Dstats;
-        else
-            $f_stats=$this->Tstats;
-        $f_eps = $this->eps;
-        try
-        {
-            $this->setDate($end_d);
-        } catch (Exception $e)
-        {
-
-            return "Impossible de générer de comparaison avec cette date de fin, essayez un jour avant<br />";
-        }
-
-        $compare_s = array();
-        $compare_e = array();
-
-        $first_d = date("d-m-y", strtotime($first_d));
-        $end_d = date("d-m-y", strtotime($end_d));
-        if ($daily)
-        {
-            foreach ($this->Dstats as $nom => $stat)
-            {
-                if (isset($f_stats[$nom]))
-                    $compare_s[$nom] = $stat - $f_stats[$nom];
-                else
-                    $compare_s[$nom] = $stat;
-            }
-            $this->Dstats = $compare_s;
-            return $this->daily_display($path, "Comparaison des stats journalière du $first_d avec celles du $end_d ");
-        }
-        else
-        {
-            foreach ($this->Tstats as $nom => $stat)
-            {
-                if (isset($f_stats[$nom]))
-                    $compare_s[$nom] = $stat - $f_stats[$nom];
-                else
-                    $compare_s[$nom] = $stat;
-
-                if (isset($f_eps[$nom]))
-                    $compare_e[$nom] = $this->eps[$nom] - $f_eps[$nom];
-                else
-                    $compare_e[$nom] = $this->eps[$nom];
-            }
-            $this->Tstats = $compare_s;
-            $this->eps = $compare_e;
-            return $this->total_display($path, "Statistique du $first_d au $end_d inclus");
-        }
-    }
-
-    function daily_display($img="//www.gestdown.info/images/graph/", $graph_title=NULL) {
-        if ($this->bug)
-            return "Aucune stats";
-        $s_dls = array();
-        $s_names = array();
-        $output = '';
-        foreach ($this->Dstats as $name => $dl)
-        {
-            $s_names[] = $name;
-            $s_dls[] = $dl;
-        }
-        $total_day = array_sum($s_dls);
-        $legend_x = array('Téléchargements');
-        $legend_y = $s_names;
-        $graph = new CAsBarDiagram;
-        $graph->bwidth = 12; // set one bar width, pixels
-        $graph->bt_total = 'Total'; // 'totals' column title, if other than 'Totals'
-        $graph->showtotals = 0;  // uncomment it if You don't need 'totals' column
-        $graph->precision = 0;  // decimal precision
-        // call drawing function
-        $graph->imgpath = $img;
-        if ($graph_title == NULL)
-            $graph_title = "Statistiques journalière du " . date("d-m-y", strtotime($this->date_));
-        ob_start();
-        $graph->DiagramBar($legend_x, $legend_y, array($s_dls), $graph_title);
-        echo "<tr class='barhead'><td nowrap><span style=\"color:red;\">Total du jour</span></td>
-		
-		   <td align=right nowrap>&nbsp; $total_day &nbsp;</td>
-		<td align=right nowrap><b>&nbsp;  &nbsp;</b></tr>
-		</table><!-- 001 finish -->\n</p>";
-        $output = ob_get_contents();
-        ob_end_clean();
-        return $output;
-    }
-
-    function total_display($img="//www.gestdown.info/images/graph/", $graph_title=NULL) {
-        if ($this->bug)
-            return "Aucune stats";
+    private function generateGraph($img, $graph_title, $stats)
+    {
         $s_dls = array();
         $s_names = array();
         $s_eps = array();
+        $s_ddl = array();
         $output = '';
-        foreach ($this->Tstats as $name => $dl)
-        {
-            $s_names[] = $name;
-            $s_dls[] = $dl;
-            $s_eps[] = $this->eps[$name];
+        foreach ($stats as $name => $stat) {
+            $s_names[] = $stat->nom;
+            $s_dls[] = $stat->Downloads;
+            $s_ddl[] = $stat->DirectDownloads;
+            $s_eps[] = $stat->Episodes;
         }
         $total_day = array_sum($s_dls);
         $total_eps = array_sum($s_eps);
-        $legend_x = array('Téléchargements', 'Episodes');
+        $total_ddl = array_sum($s_ddl);
+        $legend_x = array('Téléchargements', 'Dont DDL',  'Episodes');
         $legend_y = $s_names;
         $graph = new CAsBarDiagram;
         $graph->bwidth = 8; // set one bar width, pixels
@@ -171,19 +86,55 @@ class Stats {
         // call drawing function
         $graph->imgpath = $img;
         if ($graph_title == NULL)
-            $graph_title = "Statistiques générale au " . date("d-m-y", strtotime($this->date_));
+            $graph_title = "Statistiques au " . date("d-m-y", strtotime($this->_date));
         ob_start();
-        $graph->DiagramBar($legend_x, $legend_y, array($s_dls, $s_eps), $graph_title);
+        $graph->DiagramBar($legend_x, $legend_y, array($s_dls, $s_ddl ,$s_eps), $graph_title);
         echo "<tr class='barhead'><td nowrap><span style=\"color:red;\">Total général</span></td>
-		
+
 		   <td align=right nowrap>&nbsp; $total_day &nbsp;</td>
-		   <td align=right nowrap><b>&nbsp; $total_eps  &nbsp;</b></tr>
+		     <td align=right nowrap><b>&nbsp; $total_ddl  &nbsp;</b></td>
+		   <td align=right nowrap><b>&nbsp; $total_eps  &nbsp;</b>
 		   <td align=right nowrap><b>&nbsp;  &nbsp;</b></tr>
-		<td align=right nowrap><b>&nbsp;  &nbsp;</b></tr>
 		</table><!-- 001 finish -->\n</p>";
         $output = ob_get_contents();
         ob_end_clean();
         return $output;
+    }
+
+    function compare($end_d, $daily = false, $path = "//www.gestdown.info/images/graph/")
+    {
+        $dailyS = $this->dailyStats;
+        $totalS = $this->totalStats;
+        $startDate = $this->_date;
+        $this->setDate($end_d);
+        if($daily) {
+            $endStat = &$this->dailyStats;
+            $startStat = &$dailyS;
+            $statTitle =  'Statistiques Journalières entre ';
+        } else {
+            $endStat = &$this->totalStats;
+            $startStat = &$totalS;
+            $statTitle =  'Statistiques Générale entre ';
+        }
+            foreach($endStat as $key=>$stat) {
+                if(!isset($startStat[$key]))
+                    continue;
+                $endStat[$key]->Downloads = $stat->Downloads - $startStat[$key]->Downloads;
+                $endStat[$key]->DirectDownloads = $stat->DirectDownloads - $startStat[$key]->DirectDownloads;
+                $endStat[$key]->Episodes = $stat->Episodes - $startStat[$key]->Episodes;
+
+        }
+        return $this->generateGraph($path, $statTitle. date("d-m-y", strtotime($startDate)) . ' et ' .  date("d-m-y", strtotime($this->_date)), $endStat);
+    }
+
+    function daily_display($img = "//www.gestdown.info/images/graph/")
+    {
+        return $this->generateGraph($img, "Statistiques Journalières au " . date("d-m-y", strtotime($this->_date)), $this->dailyStats);
+    }
+
+    function total_display($img = "//www.gestdown.info/images/graph/")
+    {
+        return $this->generateGraph($img, "Statistiques Totales au " . date("d-m-y", strtotime($this->_date)), $this->totalStats);
     }
 
 }

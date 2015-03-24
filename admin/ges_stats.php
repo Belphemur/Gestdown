@@ -1,9 +1,5 @@
 <?php
 require_once 'header.php';
-unset($db);
-$db = ezDB::getInstance();
-$db->connect($sql_serveur, $sql_login, $sql_pass, $sql_bdd);
-$db->query("SET NAMES 'utf8'");
 ?>
 <script type="text/javascript">
     function DecomposeDate(LeParam1){
@@ -115,8 +111,8 @@ $db->query("SET NAMES 'utf8'");
                 $('#afficher').slideUp('slow');
             }
         });
-        $('#datepicker_end').datepicker({minDate: new Date(2009,9, 23), maxDate: '+0D'});
-        $('#datepicker').datepicker({minDate: new Date(2009,9, 23), maxDate: '+0D'});
+        $('#datepicker_end').datepicker({minDate: new Date(2015,2, 20), maxDate: '+0D'});
+        $('#datepicker').datepicker({minDate: new Date(2015,2, 20), maxDate: '+0D'});
 
     });
 

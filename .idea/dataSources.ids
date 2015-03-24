@@ -51,6 +51,7 @@
       <column name="width" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <column name="height" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="DownloadStats_ibfk_1" table="downloadstats" schema="" catalog="c1mysql" columns="Serie"/>
       <index name="nom" unique="false" columns="nom"/>
     </table>
     <table name="descriptions" schema="" catalog="c1mysql" type="TABLE">
@@ -66,11 +67,12 @@
       <column name="episode" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="type" sqlType="VARCHAR" precision="5" scale="0" nullable="false" jdbcType="12"/>
       <column name="filepath" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="downloads" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
       <primary-key name="PRIMARY" columns="episode,type"/>
       <index name="unique_filepath" unique="true" columns="filepath"/>
     </table>
     <table name="downloads" schema="" catalog="c1mysql" type="TABLE">
-      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="categorie" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="nom" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
       <column name="date" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
@@ -86,6 +88,17 @@
       <column name="actif" sqlType="TINYINT UNSIGNED" precision="3" scale="0" nullable="false" jdbcType="-6" def="Mg=="/>
       <column name="nbhits" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
       <column name="mort" sqlType="TINYINT UNSIGNED" precision="3" scale="0" nullable="false" jdbcType="-6" def="MA=="/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="downloadstats" schema="" catalog="c1mysql" type="TABLE">
+      <column name="Date" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <column name="Serie" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="Type" sqlType="VARCHAR" precision="15" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Downloads" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="DirectDownloads" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="Episodes" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="Date,Serie,Type"/>
+      <foreign-key name="DownloadStats_ibfk_1" columns="Serie" ref-table="categorie" ref-schema="" ref-catalog="c1mysql" ref-columns="id" update-rule="3" delete-rule="0" deferrability="2"/>
     </table>
     <table name="informations" schema="" catalog="c1mysql" type="TABLE">
       <column name="cat_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
