@@ -33,8 +33,7 @@ function sendToImgur($image, $name)
     );
     $basic = $client->api('image')->upload($imageData);
     unlink($image);
-    $link = explode('//',$basic->getData()['link']);
-    return '//'.$link[1];
+    return $basic->getData()['link'];
 }
 
 function resizeAndImgur($uploadfile, $screenPath, $name)
@@ -103,6 +102,9 @@ if (isset($_POST['id'])) {
                     }
                 } else if (empty($screen))
                     die("Le screenshot envoyé est invalide");
+
+                $link = explode('//',$screen);
+                $screen= '//'.$link[1];
 
                 if (isset(SessionManager::getInstance()->sortir) && SessionManager::getInstance()->sortir == 1) {
                     $sql = "UPDATE downloads SET auteur=?, categorie=?, nom=?, description=?, lien=?, lien2=?,lien3=?,torrentMQ=?,torrentHD=?,torrentFHD=?, screen=?, actif=?, mort=?,date=? WHERE id=?";
