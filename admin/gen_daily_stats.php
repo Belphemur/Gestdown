@@ -8,18 +8,28 @@ $nbre = $db->getVar();
 if ($nbre == 0)
 {
     $sqlTotalToday = 'INSERT INTO DownloadStats (Date,Serie,Type,Downloads,DirectDownloads,Episodes)
-SELECT CURDATE() as DateNow, TotalStat.serie,  "Total", TotalStat.sum, TotalStat.DDL, TotalStat.nb FROM (
-    SELECT SUM(d.nbhits) AS sum,COUNT(d.id) AS nb, c.id as serie, c.nom as nom,
-    (
-      SELECT SUM(ddl.downloads) FROM DirectDownloads ddl WHERE ddl.episode=d.id GROUP BY d.id
-    ) as DDL
+SELECT CURDATE() as DateNow, TotalStat.serie,  "Total", TotalStat.sum, DDL.sumDDL, TotalStat.nb
+FROM (
+    SELECT SUM(d.nbhits) AS sum,COUNT(d.id) AS nb, c.id as serie, c.nom as nom
     FROM categorie c
-    JOIN downloads d
+    LEFT JOIN downloads d
     ON d.categorie=c.id
     WHERE c.licencie!=1 AND c.stopped!=1
     GROUP BY c.nom
     ORDER BY c.nom ASC
-) as TotalStat';
+) as TotalStat
+LEFT JOIN
+(
+    SELECT SUM(ddl.downloads) as sumDDL, ddl.episode, c.id as catID
+    FROM DirectDownloads ddl
+    LEFT JOIN downloads d
+    ON d.id = ddl.episode
+    LEFT JOIN categorie c
+    ON c.id = d.categorie
+    GROUP BY c.id
+
+) as DDL
+ON DDL.catID = TotalStat.serie';
 
     $db->query($sqlTotalToday);
     $sqlDailyToday = 'INSERT INTO DownloadStats (Date,Serie,Type,Downloads,DirectDownloads,Episodes)
