@@ -11,7 +11,7 @@ link back are required.
 
 
 body {
-	background: #337FC6 url("bg.png") top center repeat-y;
+	background: #337FC6 url("blue-backgrounds-5069-5375-hd-wallpapers.jpg") top center no-repeat fixed;
 	font: normal 8pt/13pt verdana, arial,sans-serif;
 	color: #808080;
 }
@@ -43,7 +43,7 @@ a:hover {
 }
 
 #container {
-	width: 900px;
+	width: 70%;
 	background: #fff url("sidebar.gif") repeat-y right;
 	border: solid 10px #fff;
 	margin: 0 auto;
