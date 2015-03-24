@@ -14,12 +14,12 @@ function peer5Downloader(link, id, type) {
                 data: {
                     id: ep,
                     type: type,
-                    downloaded:true
+                    downloaded: true
                 },
                 dataType: "json"
-            }).success(function(){
+            }).success(function () {
                 console.log("File downloaded");
-            }).fail(function(e){
+            }).fail(function (e) {
                 console.error(e);
             })
         }
@@ -41,7 +41,7 @@ function checkDDL(e, options) {
         dataType: "json"
     }).success(function (result) {
         var decoded = Base64.decode(result.dlpath);
-        peer5Downloader(decoded);
+        peer5Downloader(decoded, ep, qual);
     }).fail(function (e) {
         console.error(e);
         alert("Le lien DDL ne marche pas, essayer l'autre lien");
