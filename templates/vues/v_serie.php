@@ -272,6 +272,9 @@ EOF;
             <script id="screenshots" type="text/cycle">
                $screens
             </script>
+            <h2>Commentaires</h2>
+            <div id="disqus_thread"></div>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
             <h2>Episodes</h2>
             <table id="episodes" class="table table-bordered" width="100%">
               <thead>
@@ -314,6 +317,18 @@ if($nbScreen > 0) {
     ga('create', 'UA-9163128-1', 'auto');
     ga('send', 'pageview');
 
+</script>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'ame-no-tsuki';
+    var disqus_identifier ='<?php echo $this->serie->getNom() ?>';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
 </script>
 </body>
 </html>
