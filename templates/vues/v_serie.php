@@ -46,20 +46,24 @@ function generateTVEpisode(stdClass $episode, $website) {
     $nbScreen = count($serie->episodes);
     $totalDl =0;
     $TVEpisodes = array();
+    $EpLinks = array();
 
     $currentEp = null;
     if($nbScreen > 0) {
         for ($i = 0; $i < $nbScreen; $i++) {
             if($i == 0){
                 $firstScreen = sprintf($templateImg, $serie->episodes[0]->screen);
+            } else {
+                $screens .= sprintf($templateImg, $episode->screen) . PHP_EOL;
             }
+
             $episode = $serie->episodes[$i];
             if(isset($this->episodeId) && $episode->id == $this->episodeId) {
                 $currentEp = $episode;
             }
             $TVEpisodes[] = generateTVEpisode($episode, $this->urlWebsite);
             $totalDl+=$episode->dl;
-            $screens .= sprintf($templateImg, $episode->screen) . PHP_EOL;
+            $EpLinks[] =  $this->urlWebsite . 'ep-'.$episode->id.'.html';
         }
         $jsonEpisode = json_encode($serie->episodes);
     }
@@ -233,6 +237,15 @@ EOF;
     </section><!-- end top -->
 
     <section class="wrapper">
+        <div style="display: none; visibility: hidden">
+            <?php
+            if (!isset($this->episodeId)) {
+                foreach ($EpLinks as $link) {
+                    echo '<a href="', $link, '" >', $link, '</a>', PHP_EOL;
+                }
+            }
+            ?>
+        </div>
         <div class="content">
 
             <p><?php echo $serie->synopsis ?></p>

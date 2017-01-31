@@ -14,7 +14,7 @@ class Serie implements Module
      * @param $id
      * @param EzDB $db
      * @param bool $lite
-     * @throws Error
+     * @throws GDError
      */
     function __construct($id, EzDB $db)
     {
@@ -53,7 +53,7 @@ class Serie implements Module
         $sqlPreviousSerie = "SELECT nom, id FROM categorie WHERE nom < ? AND nom != 'Prob de lien' ORDER BY nom DESC LIMIT 1";
 
         if (!is_numeric($this->id)) {
-            throw new Error('L\'identifiant doit être un nombre', 1);
+            throw new GDError('L\'identifiant doit être un nombre', 1);
         }
 
         if (!$this->db->pQuery($sql, array('i', $this->id))) {
@@ -64,7 +64,7 @@ class Serie implements Module
 		ON c.id = i.cat_id
 		WHERE c.id=?";
             if (!$this->db->pQuery($sql, array('i', $this->id))) {
-                throw new Error('Aucun résultat pour cette série', 2);
+                throw new GDError('Aucun résultat pour cette série', 2);
             } else {
                 $this->noEps = true;
                 $this->result = $this->db->getResults();

@@ -32,12 +32,12 @@ class Episode implements Module
 		WHERE d.id=? AND d.actif=1 ";
         if(!is_numeric($this->id))
         {
-            throw new Error('L\'identifiant doit être un nombre',1);
+            throw new GDError('L\'identifiant doit être un nombre',1);
             return false;
         }
         else if(! $this->db->pQuery($sql,array('i',$this->id)))
         {
-            throw new Error('Aucun résultat pour cet épisode',2);
+            throw new GDError('Aucun résultat pour cet épisode',2);
             return false;
         }
         else
@@ -64,7 +64,7 @@ class Episode implements Module
 
     function execute()
     {
-      throw new Error("Not implemented");
+      throw new GDError("Not implemented");
     }
 }
 ?>

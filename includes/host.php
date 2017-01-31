@@ -57,7 +57,7 @@ function linkInformations($in,$qual=false)
     $serie;
     $num;
     $quality;
-    if( preg_match('/\[.+\](.+)_([0-9]*|\d*\.\d{1}?\d*|OAV)_(HD|MQ|FHD)(|.+)\.(mp4|avi|mkv)/', $in,$matches))
+    if( preg_match('/\[.+\](.+)_([0-9]*|\d*\.\d{1}?\d*|OAV|OAD)_(HD|MQ|FHD)(|.+)\.(mp4|avi|mkv)/', $in,$matches))
     {
         $serie=preg_replace('@[^a-zA-Z0-9-.!]@i',' ',$matches[1]);
         $num= $matches[2];

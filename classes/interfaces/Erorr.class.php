@@ -37,5 +37,5 @@ abstract class CustomException extends Exception implements IException
                                 . "{$this->getTraceAsString()}";
     }
 }
-class Error extends CustomException {}
+class GDError extends CustomException {}
 ?>

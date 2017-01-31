@@ -66,12 +66,12 @@ class Index implements Module
 		LIMIT 0,5";
         if(!is_readable($this->fichier))
         {
-            throw new Error('Le fichier de news est inaccessible',1);
+            throw new GDError('Le fichier de news est inaccessible',1);
             return false;
         }
         else if(!$this->db->mQuery($sql))
         {
-            throw new Error('Aucun résultat pour cette requête',2);
+            throw new GDError('Aucun résultat pour cette requête',2);
             return false;
         }
         else
@@ -118,7 +118,7 @@ class Index implements Module
         if($this->db->query($sql))
             $return->avancement=$this->db->getResults(false,false);
         else
-            throw new Error('Aucun épisode en production',10);
+            throw new GDError('Aucun épisode en production',10);
         return $return;
     }
 }

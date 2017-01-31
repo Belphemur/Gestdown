@@ -21,10 +21,10 @@ if (isset($_GET['ext'])) {
             $vue->serie = new Serie($id, $db);
             $titre .= $vue->serie->getNom();
         } else {
-            throw new Error("problem");
+            throw new GDError("problem");
         }
 
-    } catch (Error $e) {
+    } catch (GDError $e) {
         $titre = "Gestdown : Not Found";
         $viewFile = "v_404.php";
     }
