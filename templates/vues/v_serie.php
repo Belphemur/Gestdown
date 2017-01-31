@@ -81,6 +81,7 @@ function generateTVEpisode(stdClass $episode, $website) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0"/>
     <link rel="stylesheet" type="text/css" href="static/css/reset.css">
     <link rel="stylesheet" type="text/css" href="static/css/main.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <meta property="og:title" content="<?php echo $this->titre; ?>" />
     <?php
     if(isset($this->episodeId)) {
@@ -100,9 +101,11 @@ if ($nbScreen > 0) {
     <link rel="stylesheet" type="text/css" href="static/css/dataTables.css">
     <link rel="stylesheet" type="text/css" href="static/css/dataTables.responsive.css">
     <script type="text/javascript" src="static/js/jquery.js"></script>
+    <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script type="text/javascript" src="static/js/jquery.cycle2.min.js"></script>
     <script type="text/javascript" language="javascript" src="static/js/datatables.1.10.5.min.js"></script>
     <script type="text/javascript" language="javascript" src="static/js/dataTables.responsive.js"></script>
+    <script type="text/javascript" language="javascript" src="static/js/download.js"></script>
     <script type="text/javascript" language="javascript" src="static/js/episode-display.js"></script>
 <?php
 }
@@ -317,7 +320,7 @@ EOF;
 <?php
 if($nbScreen > 0) {
 ?>
-    <script src="//api.peer5.com/peer5.js?id=wsyczbjqfdd0bgdy11j9" type="application/javascript"></script>
+    <!--<script src="//api.peer5.com/peer5.js?id=wsyczbjqfdd0bgdy11j9" type="application/javascript"></script> -->
 <?php
 }
 ?>
@@ -343,5 +346,14 @@ if($nbScreen > 0) {
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
 </script>
+
+<div id="dialog-download" title="Téléchargement">
+    <p>
+        <span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>Téléchargement en cours
+    </p>
+    <p><span id="downloaded"></span>/<span id="total"></span><br />
+        <progress id="progress" value="0" max="100"></progress>
+    </p>
+</div>
 </body>
 </html>
