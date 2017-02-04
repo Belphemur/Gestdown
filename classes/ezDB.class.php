@@ -396,6 +396,9 @@ class ezDB {
             {
                 $this->lastInsertedID = $this->dbWrap->insert_id;
                 $this->affectedRows = $stmt->affected_rows;
+            } else if (preg_match("/^(update)\s+/i", $this->lastQuery))
+            {
+                $this->affectedRows = $stmt->affected_rows;
             }
             else if (preg_match("/^select\s+/i", $this->lastQuery))
             {
